@@ -1,38 +1,48 @@
-.App {
-  text-align: center;
+
+.app-header-img-0 {
+  background-image: url(./images/pexels-azwar-ipank-1133086.jpg);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app-header-img-1 {
+  background-image: url(./images/pexels-brett-sayles-1143921.jpg);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.app-header-img-2 {
+  background-image: url(./images/pexels-brett-sayles-1143926.jpg);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.app-header-img-3 {
+  background-image: url(./images/pexels-chloe-huiss-1217607.jpg);
 }
 
-.App-link {
-  color: #61dafb;
+.app-header-img-4 {
+  background-image: url(./images/pexels-kathryn-archibald-1165125.jpg);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app-header-img-5 {
+  background-image: url(./images/pexels-matt-hardy-1842866.jpg);
+}
+
+.app-header-img-6 {
+  background-image: url(./images/pexels-oleksandr-pidvalnyi-2702625.jpg);
+}
+
+.app-header-img-7 {
+  background-image: url(./images/pexels-payam-masouri-731354.jpg);
+}
+
+.app-header-img-8 {
+  background-image: url(./images/pexels-pixabay-262247.jpg);
+}
+
+.app-header-img-9 {
+  background-image: url(./images/pexels-pixabay-65615.jpg);
+}
+
+.app-header-img-10 {
+  background-image: url(./images/pexels-tomasz-filipek-1630039.jpg);
+}
+
+.app-header-img-11 {
+  background-image: url(./images/pexels-william-mcallister-3793366.jpg);
 }
