@@ -1,48 +1,71 @@
-
 .app-header-img-0 {
-  background-image: url(./images/pexels-azwar-ipank-1133086.jpg);
+    background-image: url(./images/pexels-azwar-ipank-1133086.jpg);
 }
 
 .app-header-img-1 {
-  background-image: url(./images/pexels-brett-sayles-1143921.jpg);
+    background-image: url(./images/pexels-brett-sayles-1143921.jpg);
 }
 
 .app-header-img-2 {
-  background-image: url(./images/pexels-brett-sayles-1143926.jpg);
+    background-image: url(./images/pexels-brett-sayles-1143926.jpg);
 }
 
 .app-header-img-3 {
-  background-image: url(./images/pexels-chloe-huiss-1217607.jpg);
+    background-image: url(./images/pexels-chloe-huiss-1217607.jpg);
 }
 
 .app-header-img-4 {
-  background-image: url(./images/pexels-kathryn-archibald-1165125.jpg);
+    background-image: url(./images/pexels-kathryn-archibald-1165125.jpg);
 }
 
 .app-header-img-5 {
-  background-image: url(./images/pexels-matt-hardy-1842866.jpg);
+    background-image: url(./images/pexels-matt-hardy-1842866.jpg);
 }
 
 .app-header-img-6 {
-  background-image: url(./images/pexels-oleksandr-pidvalnyi-2702625.jpg);
+    background-image: url(./images/pexels-oleksandr-pidvalnyi-2702625.jpg);
 }
 
 .app-header-img-7 {
-  background-image: url(./images/pexels-payam-masouri-731354.jpg);
+    background-image: url(./images/pexels-payam-masouri-731354.jpg);
 }
 
 .app-header-img-8 {
-  background-image: url(./images/pexels-pixabay-262247.jpg);
+    background-image: url(./images/pexels-pixabay-262247.jpg);
 }
 
 .app-header-img-9 {
-  background-image: url(./images/pexels-pixabay-65615.jpg);
+    background-image: url(./images/pexels-pixabay-65615.jpg);
 }
 
 .app-header-img-10 {
-  background-image: url(./images/pexels-tomasz-filipek-1630039.jpg);
+    background-image: url(./images/pexels-tomasz-filipek-1630039.jpg);
 }
 
 .app-header-img-11 {
-  background-image: url(./images/pexels-william-mcallister-3793366.jpg);
+    background-image: url(./images/pexels-william-mcallister-3793366.jpg);
+}
+
+.bordered-component {
+    border: solid 2px #000000;
+    border-collapse: collapse;
+    border-radius: 12px;
+    height: 100%;
+    margin: 5px 0px 10px;
+}
+
+.banner-image {
+    height: 16em;
+    max-height: 16em;
+    min-height: 16em;
+    bottom: 0;
+}
+
+.banner-container {
+    border: solid 2px #000000;
+    border-collapse: collapse;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 3px;
+    background-image: url(./images/pexels-karolina-grabowska-6478119.png);
 }

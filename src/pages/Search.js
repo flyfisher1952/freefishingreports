@@ -1,9 +1,18 @@
 import React from "react";
 
-function Search(){
+const Search = () => {
     return (
-        <h1>Search</h1>
+        <div
+            style={{
+                display: "flex",
+                justifyContent: "Right",
+                alignItems: "Right",
+                height: "100vh",
+            }}
+        >
+            <h1>Find a Report</h1>
+        </div>
     );
-}
+};
 
 export default Search;

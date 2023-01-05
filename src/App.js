@@ -1,11 +1,13 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import Navbar from "./components/NavBar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Banner from "./components/Banner";
-import Home from "./pages/Home";
+import Home from "./pages/index";
 import Search from "./pages/Search";
+import About from "./pages/About";
 import PostReport from "./pages/PostReport";
+import Register from "./pages/Register";
 
 import "./App.css";
 
@@ -19,26 +21,16 @@ function App() {
             </div>
             <div className="row">
                 <div className="col">
-                    <Navbar bg="light" expand="lg">
-                        <Navbar.Brand href="#home">Free Fishing Reports</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="me-auto" variant="tabs" activeKey="/home">
-                                <Nav.Item>
-                                    <Nav.Link href="/Home">Home </Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="/Search">Find a Report</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="/PostReport">Post a Report</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="/Register">Register/Signin</Nav.Link>
-                                </Nav.Item>
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Navbar>
+                    <Router>
+                        <Navbar />
+                        <Routes>
+                            <Route path="/" exact ac element={<Home />}></Route>
+                            <Route path="/Search" element={<Search />}></Route>
+                            <Route path="/PostReport" element={<PostReport />}></Route>
+                            <Route path="/About" element={<About />}></Route>
+                            <Route path="/Register" element={<Register />}></Route>
+                        </Routes>
+                    </Router>
                 </div>
             </div>
         </div>
