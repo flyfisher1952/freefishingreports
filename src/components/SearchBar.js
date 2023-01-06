@@ -37,30 +37,31 @@ const SearchBar = () => {
                     onClick={selectCountryHandler}
                 >
                     {
-                    allCountries.map((country) => (
-                        <Dropdown.Item eventKey={country.id}>{country.name}</Dropdown.Item>
-                    ));
+                        allCountries.map(country => {
+                            <Dropdown.Item eventKey={country.id}>{country.name}</Dropdown.Item>
+                        });
 
-                    if (Object.keys(selectedCountry).length !== 0)
-                    <div>
-                    <DropdownButton
-                        id="state-dropdown"
-                        className="dropdown-button"
-                        size="sm"
-                        expand="sm"
-                        variant="light"
-                        bg="light"
-                        title="Select a State"
-                        onClick={selectStateHandler}
-                        
-                    >
-                        {
-                            allStates.forEach(state => {
-                                if(state.country_id === selectedCountry.id){
-                                    <Dropdown.Item eventKey={state.id}>{state.name}</Dropdown.Item>
-                                }
-                            });
-                        }
+                        if (Object.keys(selectedCountry).length !== 0)
+                        <div>
+                        <DropdownButton
+                            id="state-dropdown"
+                            className="dropdown-button"
+                            size="sm"
+                            expand="sm"
+                            variant="light"
+                            bg="light"
+                            title="Select a State"
+                            onClick={selectStateHandler}
+                            
+                        >
+                            {
+                                allStates.forEach(state => {
+                                    if(state.country_id === selectedCountry.id){
+                                        <Dropdown.Item eventKey={state.id}>{state.name}</Dropdown.Item>
+                                    }
+                                });
+                            }
+                    }
                     </DropdownButton>
                 </div>
     
