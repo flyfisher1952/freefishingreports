@@ -51,7 +51,8 @@
     border-collapse: collapse;
     border-radius: 12px;
     height: 100%;
-    margin: 5px 0px 10px;
+    margin: 5px 0px;
+    padding: 0.35em;
 }
 
 .banner-image {
@@ -62,10 +63,15 @@
 }
 
 .banner-container {
-    border: solid 2px #000000;
+    border: solid 2px #5b5b5b;
     border-collapse: collapse;
     border-radius: 12px;
     text-align: center;
     margin-top: 3px;
+    margin-left: 5xp;
     background-image: url(./images/pexels-karolina-grabowska-6478119.png);
+}
+
+.dropdown-button {
+    width: 100%;
 }

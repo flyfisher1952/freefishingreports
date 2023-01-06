@@ -13,11 +13,9 @@ import "./App.css";
 
 function App() {
     return (
-        <div className="container-fluid">
+        <div className="container-fluid h-100vh h-100vw">
             <div className="row">
-                <div className="col">
-                    <Banner />
-                </div>
+                <Banner />
             </div>
             <div className="row">
                 <div className="col">
