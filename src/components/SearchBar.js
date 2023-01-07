@@ -14,17 +14,32 @@ const SearchBar = () => {
 
     const [selectedStateTitle, setSelectedStateTitle] = useState(STATE_DD_TITLE);
     const [selectedStateId, setSelectedStateId] = useState(0);
-    const [availableStates, setAvailableStates] = useState([]);
+    const [stateItems, setStateItems] = useState();
+
+    const setStateDropdownItems = (id) => {
+        let avail = states.filter((s) => {
+            return s.country_id == id;
+        });
+
+        setStateItems(
+            avail.map((state) => (
+                <Dropdown.Item key={state.id} eventKey={state.id} value={state.name}>
+                    {state.name}
+                </Dropdown.Item>
+            ))
+        );
+    };
 
     const selectCountryHandler = (id, evt) => {
         setSelectedCountryId(id);
         setCountryDropDownTitle(evt.target.textContent);
         setSelectedStateId(0);
-        setAvailableStates(
-            states.filter((s) => {
-                return s.country_id === id;
-            })
-        );
+        setStateDropdownItems(id);
+    };
+
+    const selectStateHandler = (id, evt) => {
+        setSelectedStateId(id);
+        setSelectedStateTitle(evt.target.textContent);
     };
 
     return (
@@ -32,7 +47,7 @@ const SearchBar = () => {
             <div className="row bordered-component">
                 <h3>Select your filters</h3>
                 <div className="row">
-                    <DropdownButton id="countryDropdown" variant="light" title={countryDropdownTitle} onSelect={selectCountryHandler}>
+                    <DropdownButton variant="light" title={countryDropdownTitle} onSelect={selectCountryHandler}>
                         {countries.map((country) => (
                             <Dropdown.Item key={country.id} eventKey={country.id} value={country.name}>
                                 {country.name}
@@ -42,12 +57,8 @@ const SearchBar = () => {
                 </div>
                 <div className="row">
                     {selectedCountryId > 0 && (
-                        <DropdownButton variant="light" title={selectedStateTitle}>
-                            {availableStates.map((state) => (
-                                <Dropdown.Item key={state.id} eventKey={state.id} value={state.name}>
-                                    {state.name}
-                                </Dropdown.Item>
-                            ))}
+                        <DropdownButton variant="light" title={selectedStateTitle} onSelect={selectStateHandler}>
+                            {stateItems}
                         </DropdownButton>
                     )}
                 </div>
