@@ -1,5 +1,5 @@
 import "../App.css";
-import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import image0 from "./../images/pexels-azwar-ipank-1133086.jpg";
 
 const Banner = () => {

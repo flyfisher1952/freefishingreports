@@ -1,15 +1,14 @@
-import React from "react";
+import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "react-bootstrap/dist/react-bootstrap";
 
-function Blog() {
+const Adds = () => {
     return (
         <div className="container-fluid h-100">
             <div className="row bordered-component">
-                <h1>Blog</h1>
+                <h4>Click Here</h4>
             </div>
         </div>
     );
-}
+};
 
-export default Blog;
+export default Adds;

@@ -1,17 +1,21 @@
 import React from "react";
 import SearchBar from "../components/SearchBar";
 import Blog from "../components/Blog";
-import "bootstrap/dist/css/bootstrap.css";
+import Adds from "../components/Adds";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Home = () => {
     return (
         <div className="container-fluid">
             <div className="row align-items-start">
-                <div className="col-3">
+                <div className="col-2">
                     <SearchBar />
                 </div>
-                <div className="col-9">
+                <div className="col-8">
                     <Blog />
+                </div>
+                <div className="col-2">
+                    <Adds />
                 </div>
             </div>
         </div>

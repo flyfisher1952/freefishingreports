@@ -1,74 +1,60 @@
-import "bootstrap/dist/css/bootstrap.css";
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 
-import allCountries from "./../countries.json";
-import allStates from "./../states.json";
+import countries from "./../countries.json";
+import states from "./../states.json";
 
 const SearchBar = () => {
-    let selectedCountry = {};
-    let countryIsSelected = false;
-    let selectedState = {};
-    let stateIsSelected = false;
+    const COUNTRY_DD_TITLE = "Select a Country";
+    const STATE_DD_TITLE = "Select a State/Region";
 
-    const selectCountryHandler = (e) => {
-        selectedCountry = e.target.value;
-        countryIsSelected = Object.keys(selectedCountry) === 0;
-        console.log(selectedCountry);
-    };
+    const [countryDropdownTitle, setCountryDropDownTitle] = useState(COUNTRY_DD_TITLE);
+    const [selectedCountryId, setSelectedCountryId] = useState(0);
 
-    const selectStateHandler = (e) => {
-        selectedState = e.target.value;
-        stateIsSelected = Object.keys(selectedState) === 0;
-        console.log(selectedState);
+    const [selectedStateTitle, setSelectedStateTitle] = useState(STATE_DD_TITLE);
+    const [selectedStateId, setSelectedStateId] = useState(0);
+    const [availableStates, setAvailableStates] = useState([]);
+
+    const selectCountryHandler = (id, evt) => {
+        setSelectedCountryId(id);
+        setCountryDropDownTitle(evt.target.textContent);
+        setSelectedStateId(0);
+        setAvailableStates(
+            states.filter((s) => {
+                return s.country_id === id;
+            })
+        );
     };
 
     return (
-        <>
-            <h3>Select your filters</h3>
-            <div className="bordered-component">
-                <DropdownButton
-                    id="country-dropdown"
-                    className="dropdown-button"
-                    size="sm"
-                    expand="sm"
-                    variant="light"
-                    bg="light"
-                    title="Select a Country"
-                    onClick={selectCountryHandler}
-                >
-                    {
-                        allCountries.map(country => {
-                            <Dropdown.Item eventKey={country.id}>{country.name}</Dropdown.Item>
-                        });
-
-                        if (Object.keys(selectedCountry).length !== 0)
-                        <div>
-                        <DropdownButton
-                            id="state-dropdown"
-                            className="dropdown-button"
-                            size="sm"
-                            expand="sm"
-                            variant="light"
-                            bg="light"
-                            title="Select a State"
-                            onClick={selectStateHandler}
-                            
-                        >
-                            {
-                                allStates.forEach(state => {
-                                    if(state.country_id === selectedCountry.id){
-                                        <Dropdown.Item eventKey={state.id}>{state.name}</Dropdown.Item>
-                                    }
-                                });
-                            }
-                    }
+        <div className="container-fluid h-100">
+            <div className="row bordered-component">
+                <h3>Select your filters</h3>
+                <div className="row">
+                    <DropdownButton id="countryDropdown" variant="light" title={countryDropdownTitle} onSelect={selectCountryHandler}>
+                        {countries.map((country) => (
+                            <Dropdown.Item key={country.id} eventKey={country.id} value={country.name}>
+                                {country.name}
+                            </Dropdown.Item>
+                        ))}
                     </DropdownButton>
                 </div>
-    
-                    }
-                </DropdownButton>
+                <div className="row">
+                    {selectedCountryId > 0 && (
+                        <DropdownButton variant="light" title={selectedStateTitle}>
+                            {availableStates.map((state) => (
+                                <Dropdown.Item key={state.id} eventKey={state.id} value={state.name}>
+                                    {state.name}
+                                </Dropdown.Item>
+                            ))}
+                        </DropdownButton>
+                    )}
+                </div>
+                <div className="row"></div>
+                <div className="row"></div>
             </div>
-        </>
+        </div>
     );
 };
 

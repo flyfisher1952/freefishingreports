@@ -1,3 +1,4 @@
+
 .app-header-img-0 {
     background-image: url(./images/pexels-azwar-ipank-1133086.jpg);
 }
@@ -46,10 +47,14 @@
     background-image: url(./images/pexels-william-mcallister-3793366.jpg);
 }
 
+.app {
+    background-color: rgb(248, 244, 240);
+    margin: 4px;
+}
+
 .bordered-component {
-    border: solid 2px #000000;
-    border-collapse: collapse;
-    border-radius: 12px;
+    background-color: white;
+    border-radius: 8px;
     height: 100%;
     margin: 5px 0px;
     padding: 0.35em;
@@ -63,12 +68,9 @@
 }
 
 .banner-container {
-    border: solid 2px #5b5b5b;
-    border-collapse: collapse;
     border-radius: 12px;
     text-align: center;
-    margin-top: 3px;
-    margin-left: 5xp;
+    margin: 10px;
     background-image: url(./images/pexels-karolina-grabowska-6478119.png);
 }
 
