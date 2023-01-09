@@ -43,7 +43,7 @@ const SearchBar = () => {
     };
 
     return (
-        <div className="container-fluid h-100">
+    <div className="container-fluid h-100">
             <div className="row bordered-component">
                 <h3>Select your filters</h3>
                 <div className="row">
@@ -62,7 +62,14 @@ const SearchBar = () => {
                         </DropdownButton>
                     )}
                 </div>
-                <div className="row"></div>
+                <div className="row">
+                {selectedStateId > 0 && (
+                        <DropdownButton variant="light" title={selectedStateTitle} onSelect={selectStateHandler}>
+                            {stateItems}
+                        </DropdownButton>
+                    )}
+
+                </div>
                 <div className="row"></div>
             </div>
         </div>
