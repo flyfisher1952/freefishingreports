@@ -1,7 +1,8 @@
 import React from "react";
-import SearchBar from "../components/SearchBar";
+import SolunarDay from "../components/SolunarDay";
 import Blog from "../components/Blog";
 import Adds from "../components/Adds";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Home = () => {
@@ -9,7 +10,7 @@ const Home = () => {
         <div className="container-fluid">
             <div className="row align-items-start">
                 <div className="col-2">
-                    <SearchBar />
+                    <SolunarDay />
                 </div>
                 <div className="col-8">
                     <Blog />

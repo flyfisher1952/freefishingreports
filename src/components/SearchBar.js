@@ -43,10 +43,10 @@ const SearchBar = () => {
     };
 
     return (
-        <div className="container-fluid h-100">
-            <div className="row bordered-component">
-                <h3>Select your filters</h3>
-                <div className="row">
+        <div className="container-fluid">
+            <div className="col bordered-component vh-100">
+                <h3>Select a Location</h3>
+                <div className="row-md-1">
                     <DropdownButton variant="light" title={countryDropdownTitle} onSelect={selectCountryHandler}>
                         {countries.map((country) => (
                             <Dropdown.Item key={country.id} eventKey={country.id} value={country.name}>
@@ -55,7 +55,7 @@ const SearchBar = () => {
                         ))}
                     </DropdownButton>
                 </div>
-                <div className="row">
+                <div className="row-md-1">
                     {selectedCountryId > 0 && (
                         <DropdownButton variant="light" title={selectedStateTitle} onSelect={selectStateHandler}>
                             {stateItems}
