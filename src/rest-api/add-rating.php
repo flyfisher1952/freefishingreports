@@ -4,7 +4,7 @@ function up_rest_api_add_rating_handler($request) {
   $response = ['status' => 1];
   $params = $request->get_json_params();
 
-  if(
+  if (
     !isset($params['rating'], $params['postID']) ||
     empty($params['rating']) ||
     empty($params['postID'])
@@ -19,11 +19,12 @@ function up_rest_api_add_rating_handler($request) {
   global $wpdb;
   $wpdb->get_results($wpdb->prepare(
     "SELECT * FROM {$wpdb->prefix}recipe_ratings
-    WHERE post_id=%d AND user_id=%d", 
-    $postID, $userID
+    WHERE post_id=%d AND user_id=%d",
+    $postID,
+    $userID
   ));
 
-  if($wpdb->num_rows > 0) {
+  if ($wpdb->num_rows > 0) {
     return $response;
   }
 
@@ -34,12 +35,13 @@ function up_rest_api_add_rating_handler($request) {
       'rating' => $rating,
       'user_id' => $userID
     ],
-    [ '%d', '%f', '%d' ]
+    ['%d', '%f', '%d']
   );
 
   $avgRating = round($wpdb->get_var($wpdb->prepare(
     "SELECT AVG(`rating`) FROM {$wpdb->prefix}recipe_ratings
-    WHERE post_id=%d", $postID
+    WHERE post_id=%d",
+    $postID
   )), 1);
 
   update_post_meta($postID, 'recipe_rating', $avgRating);
