@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 
-import countries from "./../countries.json";
-import states from "./../states.json";
+import countries from "./../data/countries.json";
+import states from "./../data/states.json";
 
 const SearchBar = () => {
     const COUNTRY_DD_TITLE = "Select a Country";
