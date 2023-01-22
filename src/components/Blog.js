@@ -1,40 +1,33 @@
-import React, { useState, useEffect } from "react";
-import axios, { isAxiosError } from "axios";
+import React from "react";
+import parse from "html-react-parser";
+import { format } from "date-fns";
+
 import "bootstrap/dist/css/bootstrap.min.css";
-import "react-bootstrap/dist/react-bootstrap";
-import { Table } from "react-bootstrap";
+import "bootstrap/dist/js/bootstrap";
+
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Spinner from "react-bootstrap/Spinner";
+
+import { useFetchBlogs } from "./hooks/BlogHooks";
 
 function Blog() {
-    const [blogs, setBlogs] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    const getBlogs = () => {
-        setIsLoading(true);
-        axios
-            .get("http://localhost:3000/blog/")
-            .then((response) => response.data)
-            .then((data) => {
-                setBlogs(data);
-                setIsLoading(false);
-            });
-    };
-
-    useEffect(() => {
-        getBlogs();
-    });
+    const [blogs, isLoading] = useFetchBlogs("http://localhost:3033/blog/");
 
     const LoadingDisplay = () => {
         return (
             <>
-                <Table>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <h4>Loading...</h4>
-                            </td>
-                        </tr>
-                    </tbody>
-                </Table>
+                <div className="container-fluid">
+                    <div>
+                        <Row>
+                            <Col>
+                                <Spinner animation="border" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </Spinner>
+                            </Col>
+                        </Row>
+                    </div>
+                </div>
             </>
         );
     };
@@ -42,17 +35,15 @@ function Blog() {
     const LoadedDisplay = () => {
         return (
             <>
-                <Table>
-                    <tbody>
-                        {blogs.map((blog) => (
-                            <tr key={blog.id}>
-                                <td>{blog.author}</td>
-                                <td>{blog.created_date}</td>
-                                <td>{blog.body}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
+                <div>
+                    {blogs.map((blog) => (
+                        <Row className="blog-table-row" key={blog.id}>
+                            <Col className="blog-author-col" xs={1}>{blog.author}</Col>
+                            <Col xs={2}>{format(new Date(blog.created_date), "dd MMM yyyy")}</Col>
+                            <Col xs={9}>{parse(blog.body)}</Col>
+                        </Row>
+                    ))}
+                </div>
             </>
         );
     };
