@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from "react";
 // import { Typeahead } from 'react-bootstrap-typeahead';
-import { Table } from 'react-bootstrap';
+import { Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const ReportList = () => {
@@ -50,6 +50,6 @@ const ReportList = () => {
             </div>
         </div>
     );
-}
+};
 
 export default ReportList;

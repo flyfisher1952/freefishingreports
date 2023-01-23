@@ -6,8 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const Home = () => {
     return (
-        <div className="container-fluid">
-            <div className="row align-items-start">
+        <div className="container-fluid h-100">
+            <div className="row align-items-start h-100">
                 <div className="col-2">
                     <SolunarDay />
                 </div>

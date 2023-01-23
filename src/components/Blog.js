@@ -9,10 +9,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Spinner from "react-bootstrap/Spinner";
 
-import { useFetchBlogs } from "./hooks/BlogHooks";
+import { UseFetchBlogs } from "./hooks/BlogHooks";
 
 function Blog() {
-    const [blogs, isLoading] = useFetchBlogs("http://localhost:3033/blog/");
+    const [blogs, isLoading] = UseFetchBlogs("http://localhost:3033/blog");
 
     const LoadingDisplay = () => {
         return (
@@ -20,7 +20,7 @@ function Blog() {
                 <div className="container-fluid">
                     <div>
                         <Row>
-                            <Col>
+                            <Col className="text-center align-middle">
                                 <Spinner animation="border" role="status">
                                     <span className="visually-hidden">Loading...</span>
                                 </Spinner>

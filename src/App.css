@@ -1,4 +1,3 @@
-
 .app-header-img-0 {
     background-image: url(./images/pexels-azwar-ipank-1133086.jpg);
 }
@@ -80,10 +79,14 @@
 
 .blog-table-row {
     border-bottom: 1px solid gray;
-    margin-bottom: .35em;
+    margin-bottom: 0.35em;
 }
 
-.blog-author-col{
+.blog-author-col {
     font-style: italic;
     font-size: larger;
+}
+
+.ad-block-style {
+    display: block;
 }
