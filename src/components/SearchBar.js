@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+/* eslint-disable eqeqeq */
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Dropdown, DropdownButton } from "react-bootstrap";
-
-import countries from "./../data/countries.json";
-import states from "./../data/states.json";
+import { UseFetchCountries, UseFetchStates } from "./hooks/SearchBarHooks";
 
 const SearchBar = () => {
     const COUNTRY_DD_TITLE = "Select a Country";
@@ -16,8 +15,11 @@ const SearchBar = () => {
     const [selectedStateId, setSelectedStateId] = useState(0);
     const [stateItems, setStateItems] = useState();
 
+    const [dbCountries, isLoadingCountries] = UseFetchCountries("http://localhost:3033/country");
+    const [dbStates, isLoadingStates] = UseFetchStates("http://localhost:3033/state");
+
     const setStateDropdownItems = (id) => {
-        let avail = states.filter((s) => {
+        let avail = dbStates.filter((s) => {
             return s.country_id == id;
         });
 
@@ -29,6 +31,8 @@ const SearchBar = () => {
             ))
         );
     };
+
+    useEffect(() => {}, []);
 
     const selectCountryHandler = (id, evt) => {
         setSelectedCountryId(id);
@@ -47,16 +51,20 @@ const SearchBar = () => {
             <div className="row bordered-component">
                 <h3>Select your filters</h3>
                 <div className="row">
-                    <DropdownButton variant="light" title={countryDropdownTitle} onSelect={selectCountryHandler}>
-                        {countries.map((country) => (
-                            <Dropdown.Item key={country.id} eventKey={country.id} value={country.name}>
-                                {country.name}
-                            </Dropdown.Item>
-                        ))}
-                    </DropdownButton>
+                    {isLoadingCountries ? (
+                        <h6>Loading...</h6>
+                    ) : (
+                        <DropdownButton variant="light" title={countryDropdownTitle} onSelect={selectCountryHandler}>
+                            {dbCountries.map((country) => (
+                                <Dropdown.Item key={country.id} eventKey={country.id} value={country.name}>
+                                    {country.name}
+                                </Dropdown.Item>
+                            ))}
+                        </DropdownButton>
+                    )}
                 </div>
                 <div className="row">
-                    {selectedCountryId > 0 && (
+                    {selectedCountryId > 0 && !isLoadingStates && (
                         <DropdownButton variant="light" title={selectedStateTitle} onSelect={selectStateHandler}>
                             {stateItems}
                         </DropdownButton>

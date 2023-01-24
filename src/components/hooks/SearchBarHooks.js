@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 
 const UseFetchCountries = (url) => {
@@ -14,7 +15,6 @@ const UseFetchCountries = (url) => {
 
     useEffect(() => {
         fetchCountries();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return [data, loading];
@@ -34,7 +34,6 @@ const UseFetchStates = (url) => {
 
     useEffect(() => {
         fetchStates();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return [data, loading];
@@ -54,7 +53,6 @@ const UseFetchWaters = (url) => {
 
     useEffect(() => {
         fetchWaters();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return [data, loading];
@@ -74,7 +72,6 @@ const UseFetchSpots = (url) => {
 
     useEffect(() => {
         fetchSpots();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return [data, loading];

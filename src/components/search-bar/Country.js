@@ -27,7 +27,7 @@ const Country = () => {
                         const item = results[index];
                         return (
                             <MenuItem key={item} option={item} position={index} style={style}>
-                                <Highlighter search={props.text}>{item}</Highlighter>
+                                <HighLighter search={props.text}>{item}</HighLighter>
                             </MenuItem>
                         );
                     }}
@@ -42,7 +42,7 @@ const Country = () => {
             maxResults={false}
             options={options}
             paginate={false}
-            placeholder="Pick a number..."
+            placeholder="Select a country..."
             renderMenu={renderMenu}
         />
     );

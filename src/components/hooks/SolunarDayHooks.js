@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
-import $ from "jquery";
+// import $ from "jquery";
 
 const UsefetchSolunarDay = (url) => {
     const [data, setData] = useState({});
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     const fetchSolunarDay = () => {
-        const data = $('#links').load(url);
+        // const data = $('#links').load(url);
 
-        setData(data);
-        setLoading(false);
+        // setData(data);
+        setData(<h5>Solunar Day TBD</h5>);
+        setIsLoading(false);
     };
 
     useEffect(() => {
@@ -17,7 +18,7 @@ const UsefetchSolunarDay = (url) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return [data, loading];
+    return [data, isLoading];
 };
 
 export { UsefetchSolunarDay };
