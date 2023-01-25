@@ -97,3 +97,17 @@
 .ad-block-style {
     display: block;
 }
+
+.float-right {
+    float: right;
+}
+
+.search-bar-filter tr,
+td {
+    border: none !important;
+}
+
+.dd-label-cell {
+    padding-top: 12px;
+    float: right;
+}
