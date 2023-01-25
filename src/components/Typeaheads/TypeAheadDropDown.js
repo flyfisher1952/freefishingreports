@@ -1,15 +1,14 @@
-// TypeAheadDropDown.js
 import "./TypeAheadDropDown.css";
 import React from "react";
 
 export default class TypeAheadDropDown extends React.Component {
-    constructor(props, placeHolder) {
+    constructor(props) {
         super(props);
         this.state = {
             suggestions: [],
             text: "",
+            selectedItem: {},
         };
-        this.placeHolder = placeHolder ? placeHolder : "Choose ...";
     }
 
     onTextChange = (e) => {
@@ -19,12 +18,13 @@ export default class TypeAheadDropDown extends React.Component {
 
         if (value.length > 0) {
             const regex = new RegExp(`^${value}`, `i`);
-            suggestions = items.filter((v) => regex.test(v));
+            suggestions = items.filter((v) => regex.test(v.name));
         }
 
         this.setState(() => ({
             suggestions,
             text: value,
+            selectedItem: {},
         }));
     };
 
@@ -32,6 +32,7 @@ export default class TypeAheadDropDown extends React.Component {
         this.setState(() => ({
             text: value,
             suggestions: [],
+            selectedItem: {},
         }));
     };
 
@@ -45,8 +46,8 @@ export default class TypeAheadDropDown extends React.Component {
         return (
             <ul>
                 {suggestions.map((item) => (
-                    <li key={item} onClick={(e) => this.suggestionSelected(item)}>
-                        {item}
+                    <li key={item.id} onClick={(e) => this.suggestionSelected(item.name)}>
+                        {item.name}
                     </li>
                 ))}
             </ul>
@@ -57,7 +58,7 @@ export default class TypeAheadDropDown extends React.Component {
         const { text } = this.state;
         return (
             <div className="TypeAheadDropDown">
-                <input onChange={this.onTextChange} placeholder="Search city name" value={text} type="text" />
+                <input onChange={this.onTextChange} placeholder="Choose ..." value={text} type="text" />
                 {this.renderSuggestions()}
             </div>
         );
