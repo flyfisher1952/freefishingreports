@@ -25,6 +25,8 @@ const SearchBar = () => {
     const [dbStates, isLoadingStates] = UseFetchStates("http://localhost:3033/state");
     const [dbWaters, setDbWaters] = useState([]);
 
+    const [filteredCountries, setFilteredCountries] = useState(dbCountries);
+
     const setStateDropdownItems = (id) => {
         let countryStates = dbStates.filter((s) => {
             return s.country_id == id;
@@ -56,6 +58,10 @@ const SearchBar = () => {
         setCountryDropDownTitle(evt.target.textContent);
         setSelectedStateId(0);
         setStateDropdownItems(id);
+    };
+
+    const countryChangedHandler = (e) => {
+        
     };
 
     const selectStateHandler = (id, evt) => {
