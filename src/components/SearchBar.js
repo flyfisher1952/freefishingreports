@@ -2,11 +2,12 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Dropdown, DropdownButton } from "react-bootstrap";
-import { UseFetchCountries, UseFetchStates } from "./hooks/SearchBarHooks";
+import { UseFetchCountries, UseFetchStates, UseFetchWaters } from "./hooks/SearchBarHooks";
 
 const SearchBar = () => {
     const COUNTRY_DD_TITLE = "Select a Country";
     const STATE_DD_TITLE = "Select a State/Region";
+    const WATER_DD_TITLE = "Select the water you fished";
 
     const [countryDropdownTitle, setCountryDropDownTitle] = useState(COUNTRY_DD_TITLE);
     const [selectedCountryId, setSelectedCountryId] = useState(0);
@@ -15,18 +16,34 @@ const SearchBar = () => {
     const [selectedStateId, setSelectedStateId] = useState(0);
     const [stateItems, setStateItems] = useState();
 
+    const [waterDropdownTitle, setWaterDropdownTitle] = useState(WATER_DD_TITLE);
+    const [selectedWaterId, setSelectedWaterId] = useState(0);
+    const [isLoadingWaters, setIsLoadingWaters] = useState(true);
+    const [waterItems, setWaterItems] = useState();
+
     const [dbCountries, isLoadingCountries] = UseFetchCountries("http://localhost:3033/country");
     const [dbStates, isLoadingStates] = UseFetchStates("http://localhost:3033/state");
+    const [dbWaters, setDbWaters] = useState([]);
 
     const setStateDropdownItems = (id) => {
-        let avail = dbStates.filter((s) => {
+        let countryStates = dbStates.filter((s) => {
             return s.country_id == id;
         });
 
         setStateItems(
-            avail.map((state) => (
-                <Dropdown.Item key={state.id} eventKey={state.id} value={state.name}>
+            countryStates.map((state) => (
+                <Dropdown.Item key={state.id} eventKey={state.id} value={state}>
                     {state.name}
+                </Dropdown.Item>
+            ))
+        );
+    };
+
+    const setWaterDropdownItems = () => {
+        setWaterItems(
+            dbWaters.map((water) => (
+                <Dropdown.Item key={water.id} eventKey={water.id} value={water}>
+                    {water.name}
                 </Dropdown.Item>
             ))
         );
@@ -44,6 +61,32 @@ const SearchBar = () => {
     const selectStateHandler = (id, evt) => {
         setSelectedStateId(id);
         setSelectedStateTitle(evt.target.textContent);
+        console.log("===> ID: " + id);
+        getStateWaters(id);
+    };
+
+    const selectWaterHandler = (id, evt) => {
+        setSelectedWaterId(id);
+        setWaterDropdownTitle(evt.target.textContent);
+    };
+
+    const getStateWaters = (id) => {
+        const URL = "http://localhost:3033/water/state" + (id ? "/" + id : "/");
+
+        async function fetchWaters() {
+            const response = await fetch(URL);
+            const json = await response.json();
+
+            console.log("===> dbWaters: " + JSON.stringify(json));
+            setDbWaters(json);
+            dbWaters.forEach((water) => {
+                console.log("===> water: " + JSON.stringify(water));
+            });
+            setIsLoadingWaters(false);
+            setWaterDropdownItems();
+        }
+
+        fetchWaters();
     };
 
     return (
@@ -72,8 +115,8 @@ const SearchBar = () => {
                 </div>
                 <div className="row">
                     {selectedStateId > 0 && (
-                        <DropdownButton variant="light" title={selectedStateTitle} onSelect={selectStateHandler}>
-                            {stateItems}
+                        <DropdownButton variant="light" title={waterDropdownTitle} onSelect={selectWaterHandler}>
+                            {waterItems}
                         </DropdownButton>
                     )}
                 </div>

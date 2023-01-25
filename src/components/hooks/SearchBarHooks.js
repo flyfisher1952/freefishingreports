@@ -39,12 +39,12 @@ const UseFetchStates = (url) => {
     return [data, loading];
 };
 
-const UseFetchWaters = (url) => {
+const UseFetchWaters = (url, state_id) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
 
     async function fetchWaters() {
-        const response = await fetch(url);
+        const response = await fetch(state_id ? url + "/" + state_id : url);
         const json = await response.json();
 
         setData(json);
