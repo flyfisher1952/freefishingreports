@@ -3,78 +3,70 @@ import { useState, useEffect } from "react";
 
 const UseFetchCountries = (url) => {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     async function fetchCountries() {
         const response = await fetch(url);
         const json = await response.json();
 
         setData(json);
-        setLoading(false);
     }
 
     useEffect(() => {
         fetchCountries();
     }, []);
 
-    return [data, loading];
+    return data;
 };
 
 const UseFetchStates = (url) => {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     async function fetchStates() {
         const response = await fetch(url);
         const json = await response.json();
 
         setData(json);
-        setLoading(false);
     }
 
     useEffect(() => {
         fetchStates();
     }, []);
 
-    return [data, loading];
+    return data;
 };
 
 const UseFetchWaters = (url, state_id) => {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     async function fetchWaters() {
         const response = await fetch(state_id ? url + "/" + state_id : url);
         const json = await response.json();
 
         setData(json);
-        setLoading(false);
     }
 
     useEffect(() => {
         fetchWaters();
     }, []);
 
-    return [data, loading];
+    return data;
 };
 
 const UseFetchSpots = (url) => {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     async function fetchSpots() {
         const response = await fetch(url);
         const json = await response.json();
 
         setData(json);
-        setLoading(false);
     }
 
     useEffect(() => {
         fetchSpots();
     }, []);
 
-    return [data, loading];
+    return data;
 };
 
 export { UseFetchCountries, UseFetchStates, UseFetchWaters, UseFetchSpots };

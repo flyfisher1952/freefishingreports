@@ -1,132 +1,108 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable eqeqeq */
 import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Dropdown, DropdownButton } from "react-bootstrap";
-import { UseFetchCountries, UseFetchStates, UseFetchWaters } from "./hooks/SearchBarHooks";
+import { Table } from "react-bootstrap";
+import { UseFetchCountries, UseFetchStates, UseFetchWaters, UseFetchSpots } from "./hooks/SearchBarHooks";
+import TypeAheadDropDown from "./Typeaheads/TypeAheadDropDown";
 
 const SearchBar = () => {
-    const COUNTRY_DD_TITLE = "Select a Country";
-    const STATE_DD_TITLE = "Select a State/Region";
-    const WATER_DD_TITLE = "Select the water you fished";
+    const dbCountries = UseFetchCountries("http://localhost:3033/country");
+    const dbStates = UseFetchStates("http://localhost:3033/state");
+    const dbWaters = UseFetchWaters("http://localhost:3033/water");
+    const dbSpots = UseFetchSpots("http://localhost:3033/spot");
 
-    const [countryDropdownTitle, setCountryDropDownTitle] = useState(COUNTRY_DD_TITLE);
-    const [selectedCountryId, setSelectedCountryId] = useState(0);
+    const [availableStates, setAvailableStates] = useState(dbStates);
+    const [availableWaters, setAvailableWaters] = useState(dbWaters);
+    const [availableSpots, setAvailableSpots] = useState(dbSpots);
 
-    const [selectedStateTitle, setSelectedStateTitle] = useState(STATE_DD_TITLE);
-    const [selectedStateId, setSelectedStateId] = useState(0);
-    const [stateItems, setStateItems] = useState();
+    const [selectedCountry, setSelectedCountry] = useState({});
+    const [selectedState, setSelectedState] = useState({});
+    const [selectedWater, setSelectedWater] = useState({});
+    const [selectedSpot, setSelectedSpot] = useState({});
 
-    const [waterDropdownTitle, setWaterDropdownTitle] = useState(WATER_DD_TITLE);
-    const [selectedWaterId, setSelectedWaterId] = useState(0);
-    const [isLoadingWaters, setIsLoadingWaters] = useState(true);
-    const [waterItems, setWaterItems] = useState();
-
-    const [dbCountries, isLoadingCountries] = UseFetchCountries("http://localhost:3033/country");
-    const [dbStates, isLoadingStates] = UseFetchStates("http://localhost:3033/state");
-    const [dbWaters, setDbWaters] = useState([]);
-
-    const [filteredCountries, setFilteredCountries] = useState(dbCountries);
-
-    const setStateDropdownItems = (id) => {
-        let countryStates = dbStates.filter((s) => {
-            return s.country_id == id;
-        });
-
-        setStateItems(
-            countryStates.map((state) => (
-                <Dropdown.Item key={state.id} eventKey={state.id} value={state}>
-                    {state.name}
-                </Dropdown.Item>
-            ))
-        );
+    const selectCountryHandler = (country) => {
+        setSelectedCountry(country);
+        setAvailableStates(dbStates.filter((state) => state.country_id == country.id));
+        console.log("==== selectCountryHandler =============================================");
+        console.log("---> COUNTRY: " + JSON.stringify(country));
+        console.log("---> AVAILABLE STATE COUNT: " + availableStates.length);
     };
 
-    const setWaterDropdownItems = () => {
-        setWaterItems(
-            dbWaters.map((water) => (
-                <Dropdown.Item key={water.id} eventKey={water.id} value={water}>
-                    {water.name}
-                </Dropdown.Item>
-            ))
-        );
+    const selectStateHandler = (state) => {
+        setSelectedState(state);
+        setAvailableWaters(dbWaters.filter((water) => state.id == water.state_id));
+        console.log("==== selectStateHandler =============================================");
+        console.log("---> STATE: " + JSON.stringify(state));
+        console.log("---> WATER KEYS: " + Object.keys(dbWaters[0]));
+        console.log("---> DB WATER LENGTH: " + dbWaters.length);
+        console.log("---> AVAILABLE WATER COUNT: " + availableWaters.length);
     };
 
-    useEffect(() => {}, []);
-
-    const selectCountryHandler = (id, evt) => {
-        setSelectedCountryId(id);
-        setCountryDropDownTitle(evt.target.textContent);
-        setSelectedStateId(0);
-        setStateDropdownItems(id);
+    const selectWaterHandler = (water) => {
+        setSelectedWater(water);
+        setAvailableSpots(dbSpots.filter((spot) => water.id == spot.water_id));
+        console.log("==== selectWaterHandler =============================================");
+        console.log("---> WATER: " + JSON.stringify(water));
+        console.log("---> SPOT KEYS: " + Object.keys(dbSpots[0]));
+        console.log("---> AVAILABLE SPOT COUNT: " + setAvailableSpots.length);
     };
 
-    const countryChangedHandler = (e) => {
-        
+    const selectSpotHandler = (spot) => {
+        setSelectedSpot(spot);
+        console.log("==== selectSpotHandler =============================================");
+        console.log("---> SPOT: " + JSON.stringify(spot));
     };
 
-    const selectStateHandler = (id, evt) => {
-        setSelectedStateId(id);
-        setSelectedStateTitle(evt.target.textContent);
-        console.log("===> ID: " + id);
-        getStateWaters(id);
-    };
-
-    const selectWaterHandler = (id, evt) => {
-        setSelectedWaterId(id);
-        setWaterDropdownTitle(evt.target.textContent);
-    };
-
-    const getStateWaters = (id) => {
-        const URL = "http://localhost:3033/water/state" + (id ? "/" + id : "/");
-
-        async function fetchWaters() {
-            const response = await fetch(URL);
-            const json = await response.json();
-
-            console.log("===> dbWaters: " + JSON.stringify(json));
-            setDbWaters(json);
-            dbWaters.forEach((water) => {
-                console.log("===> water: " + JSON.stringify(water));
-            });
-            setIsLoadingWaters(false);
-            setWaterDropdownItems();
-        }
-
-        fetchWaters();
-    };
+    useEffect(() => {});
 
     return (
         <div className="container-fluid h-100">
             <div className="row bordered-component">
-                <h3>Select your filters</h3>
-                <div className="row">
-                    {isLoadingCountries ? (
-                        <h6>Loading...</h6>
-                    ) : (
-                        <DropdownButton variant="light" title={countryDropdownTitle} onSelect={selectCountryHandler}>
-                            {dbCountries.map((country) => (
-                                <Dropdown.Item key={country.id} eventKey={country.id} value={country.name}>
-                                    {country.name}
-                                </Dropdown.Item>
-                            ))}
-                        </DropdownButton>
-                    )}
-                </div>
-                <div className="row">
-                    {selectedCountryId > 0 && !isLoadingStates && (
-                        <DropdownButton variant="light" title={selectedStateTitle} onSelect={selectStateHandler}>
-                            {stateItems}
-                        </DropdownButton>
-                    )}
-                </div>
-                <div className="row">
-                    {selectedStateId > 0 && (
-                        <DropdownButton variant="light" title={waterDropdownTitle} onSelect={selectWaterHandler}>
-                            {waterItems}
-                        </DropdownButton>
-                    )}
-                </div>
-                <div className="row"></div>
+                <h4>Select your filters</h4>
+                <Table className="table search-bar-filter">
+                    <tbody>
+                        <tr>
+                            <td className="dd-label-cell">
+                                <h6>Country: </h6>
+                            </td>
+                            <td>
+                                <TypeAheadDropDown items={dbCountries} countrySelected={selectCountryHandler} />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className="dd-label-cell">
+                                <h6>State/Region: </h6>
+                            </td>
+                            <td>
+                                <TypeAheadDropDown items={availableStates} parent={selectedCountry} stateSelected={selectStateHandler} />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className="dd-label-cell">
+                                <h6>Water: </h6>
+                            </td>
+                            <td>
+                                <TypeAheadDropDown items={availableWaters} parent={selectedState} waterSelected={selectWaterHandler} />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className="dd-label-cell">
+                                <h6>Spot: </h6>
+                            </td>
+                            <td>
+                                <TypeAheadDropDown items={availableSpots} parent={selectedWater} spotSelected={selectSpotHandler} />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <Button className="float-right" variant="success">Get Fishing Reports</Button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </Table>
             </div>
         </div>
     );

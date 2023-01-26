@@ -20,9 +20,11 @@ const ReportList = () => {
             <div className="row">
                 <Table className="hw-100" striped bordered hover>
                     <thead>
-                        <th>Date</th>
-                        <th>Place</th>
-                        <th>Report</th>
+                        <tr>
+                            <th>Date</th>
+                            <th>Place</th>
+                            <th>Report</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
