@@ -55,8 +55,6 @@ const SearchBar = () => {
         console.log("---> SPOT: " + JSON.stringify(spot));
     };
 
-    useEffect(() => {});
-
     return (
         <div className="container-fluid h-100">
             <div className="row bordered-component">

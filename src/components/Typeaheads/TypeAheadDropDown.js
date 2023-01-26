@@ -22,7 +22,7 @@ export default class TypeAheadDropDown extends React.Component {
         console.log("===>         PARENT: " + (parent ? JSON.stringify(parent) : "None"));
 
         if (value.length > 0) {
-            const regex = new RegExp(`^${value}`, `i`);
+            const regex = new RegExp(`${value}`, `i`);
 
             suggestions = items.filter((item) => regex.test(item.name));
 
