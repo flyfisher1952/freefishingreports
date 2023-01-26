@@ -25,34 +25,20 @@ const SearchBar = () => {
     const selectCountryHandler = (country) => {
         setSelectedCountry(country);
         setAvailableStates(dbStates.filter((state) => state.country_id == country.id));
-        console.log("==== selectCountryHandler =============================================");
-        console.log("---> COUNTRY: " + JSON.stringify(country));
-        console.log("---> AVAILABLE STATE COUNT: " + availableStates.length);
     };
 
     const selectStateHandler = (state) => {
         setSelectedState(state);
         setAvailableWaters(dbWaters.filter((water) => state.id == water.state_id));
-        console.log("==== selectStateHandler =============================================");
-        console.log("---> STATE: " + JSON.stringify(state));
-        console.log("---> WATER KEYS: " + Object.keys(dbWaters[0]));
-        console.log("---> DB WATER LENGTH: " + dbWaters.length);
-        console.log("---> AVAILABLE WATER COUNT: " + availableWaters.length);
     };
 
     const selectWaterHandler = (water) => {
         setSelectedWater(water);
         setAvailableSpots(dbSpots.filter((spot) => water.id == spot.water_id));
-        console.log("==== selectWaterHandler =============================================");
-        console.log("---> WATER: " + JSON.stringify(water));
-        console.log("---> SPOT KEYS: " + Object.keys(dbSpots[0]));
-        console.log("---> AVAILABLE SPOT COUNT: " + setAvailableSpots.length);
     };
 
     const selectSpotHandler = (spot) => {
         setSelectedSpot(spot);
-        console.log("==== selectSpotHandler =============================================");
-        console.log("---> SPOT: " + JSON.stringify(spot));
     };
 
     return (
@@ -96,7 +82,9 @@ const SearchBar = () => {
                         <tr>
                             <td>&nbsp;</td>
                             <td>
-                                <Button className="float-right" variant="success">Get Fishing Reports</Button>
+                                <Button className="float-right" variant="success">
+                                    Get Fishing Reports
+                                </Button>
                             </td>
                         </tr>
                     </tbody>

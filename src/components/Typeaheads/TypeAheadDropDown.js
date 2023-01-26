@@ -17,10 +17,6 @@ export default class TypeAheadDropDown extends React.Component {
         let suggestions = [];
         const value = e.target.value;
 
-        console.log("---- onTextChange ----------------------------------------------");
-        console.log("===>          VALUE: " + value);
-        console.log("===>         PARENT: " + (parent ? JSON.stringify(parent) : "None"));
-
         if (value.length > 0) {
             const regex = new RegExp(`${value}`, `i`);
 
@@ -28,13 +24,10 @@ export default class TypeAheadDropDown extends React.Component {
 
             if (parent && Object.hasOwn(parent, "id")) {
                 if (Object.hasOwn(parent, "type")) {
-                    console.log("===> FILTERING STATE on ID: " + parent.id);
                     suggestions = items.filter((item) => item.state_id == parent.id).filter((item) => regex.test(item.name));
                 } else if (Object.hasOwn(parent, "state_code")) {
-                    console.log("===> FILTERING WATER on ID: " + parent.country_id);
                     suggestions = items.filter((item) => item.state_id == parent.id).filter((item) => regex.test(item.name));
                 } else if (Object.hasOwn(parent, "kind")) {
-                    console.log("===> FILTERING SPOT on ID: " + parent.id);
                     suggestions = items.filter((item) => item.id == parent.id).filter((item) => regex.test(item.name));
                 }
             }
@@ -55,9 +48,6 @@ export default class TypeAheadDropDown extends React.Component {
             suggestions: [],
             selectedItem: item,
         }));
-
-        console.log();
-        console.log("+++> ITEM: " + JSON.stringify(item));
 
         if (countrySelected) countrySelected(item);
         if (stateSelected) stateSelected(item);
