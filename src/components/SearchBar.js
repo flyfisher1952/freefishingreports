@@ -34,12 +34,26 @@ const SearchBar = () => {
 
     const selectWaterHandler = (water) => {
         setSelectedWater(water);
-        setAvailableSpots(dbSpots.filter((spot) => water.id == spot.water_id));
+        console.log("===> water: " + JSON.stringify(water));
+        console.log("===> dbSpots: " + JSON.stringify(dbSpots));
+        setAvailableSpots(dbSpots.filter((spot) => spot.water_id == water.id));
+        console.log("===> Filtered Spots: " + JSON.stringify(dbSpots.filter((spot) => spot.water_id == water.id)));
+        console.log("===> availableSpots: " + JSON.stringify(availableSpots));
     };
 
     const selectSpotHandler = (spot) => {
         setSelectedSpot(spot);
     };
+
+    const isButtonEnabled = () => {
+        if (selectedCountry.id && selectedState.id && selectedWater.id && selectedSpot.id) {
+            return "{{false}}";
+        }
+
+        return "{{disabled}}";
+    };
+
+    useEffect(() => {}, [availableSpots]);
 
     return (
         <div className="container-fluid h-100">
@@ -82,7 +96,7 @@ const SearchBar = () => {
                         <tr>
                             <td>&nbsp;</td>
                             <td>
-                                <Button className="float-right" variant="success">
+                                <Button className="float-right" variant="success" disabled={isButtonEnabled()}>
                                     Get Fishing Reports
                                 </Button>
                             </td>
