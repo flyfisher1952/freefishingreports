@@ -23,12 +23,20 @@ export default class TypeAheadDropDown extends React.Component {
             suggestions = items.filter((item) => regex.test(item.name));
 
             if (parent && Object.hasOwn(parent, "id")) {
-                if (Object.hasOwn(parent, "type")) {
-                    suggestions = items.filter((item) => item.state_id == parent.id).filter((item) => regex.test(item.name));
-                } else if (Object.hasOwn(parent, "state_code")) {
-                    suggestions = items.filter((item) => item.state_id == parent.id).filter((item) => regex.test(item.name));
-                } else if (Object.hasOwn(parent, "kind")) {
-                    suggestions = items.filter((item) => item.id == parent.id).filter((item) => regex.test(item.name));
+                if (Object.hasOwn(parent, "table_name")) {
+                    switch (parent["table_name"]) {
+                        case "country":
+                            suggestions = items.filter((item) => item.country_id == parent.id).filter((item) => regex.test(item.name));
+                            break;
+                        case "state":
+                            suggestions = items.filter((item) => item.state_id == parent.id).filter((item) => regex.test(item.name));
+                            break;
+                        case "water":
+                            suggestions = items.filter((item) => item.water_id == parent.id).filter((item) => regex.test(item.name));
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }

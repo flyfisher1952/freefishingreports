@@ -59,8 +59,6 @@ const UseFetchSpots = (url) => {
         const response = await fetch(url);
         const json = await response.json();
 
-        console.log("---> UseFetchSpots > fetchSpots: " + JSON.stringify(json));
-
         setData(json);
     }
 

@@ -22,42 +22,47 @@ const SearchBar = () => {
     const [selectedWater, setSelectedWater] = useState({});
     const [selectedSpot, setSelectedSpot] = useState({});
 
+    const [isButtonEnabled, setIsButtonEnabled] = useState("{{disabled}}");
+
     const selectCountryHandler = (country) => {
         setSelectedCountry(country);
         setAvailableStates(dbStates.filter((state) => state.country_id == country.id));
-        console.log("===> selectCountryHandler > availableSpots: " + JSON.stringify(availableSpots));
     };
 
     const selectStateHandler = (state) => {
         setSelectedState(state);
         setAvailableWaters(dbWaters.filter((water) => state.id == water.state_id));
-        console.log("===> selectStateHandler > availableSpots: " + JSON.stringify(availableSpots));
     };
 
     const selectWaterHandler = (water) => {
         setSelectedWater(water);
-        console.log("===> selectStateHandler > water: " + JSON.stringify(water));
-        console.log("===> selectStateHandler > dbSpots: " + JSON.stringify(dbSpots));
-        console.log("===> selectCountryHandler > availableSpots: " + JSON.stringify(availableSpots));
     };
 
     const selectSpotHandler = (spot) => {
         setSelectedSpot(spot);
+        enableButton();
     };
 
-    const isButtonEnabled = () => {
+    const enableButton = () => {
         if (selectedCountry.id && selectedState.id && selectedWater.id && selectedSpot.id) {
-            return "{{false}}";
+            setIsButtonEnabled("{{false}}");
+        } else {
+            setIsButtonEnabled("{{disabled}}");
         }
-
-        return "{{disabled}}";
     };
 
     useEffect(() => {
         if (selectedWater.id) {
             setAvailableSpots(dbSpots.filter((spot) => spot.water_id == selectedWater.id));
         }
-    }, [dbSpots, selectedWater]);
+
+        if (selectedCountry.id && selectedState.id && selectedWater.id && selectedSpot.id) {
+            setIsButtonEnabled("{{false}}");
+        } else {
+            setIsButtonEnabled("{{disabled}}");
+        }
+
+    }, [dbSpots, selectedCountry, selectedState, selectedWater, selectedSpot]);
 
     return (
         <div className="container-fluid h-100">
@@ -100,7 +105,7 @@ const SearchBar = () => {
                         <tr>
                             <td>&nbsp;</td>
                             <td>
-                                <Button className="float-right" variant="success" disabled={isButtonEnabled()}>
+                                <Button className="float-right" variant="success" disabled={isButtonEnabled}>
                                     Get Fishing Reports
                                 </Button>
                             </td>
