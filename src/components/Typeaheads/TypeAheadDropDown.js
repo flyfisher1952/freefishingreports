@@ -41,7 +41,7 @@ export default class TypeAheadDropDown extends React.Component {
     };
 
     suggestionSelected = (item) => {
-        const { countrySelected, stateSelected, waterSelected, spotSelected } = this.props;
+        const { itemSelected } = this.props;
 
         this.setState(() => ({
             text: item.name,
@@ -49,10 +49,7 @@ export default class TypeAheadDropDown extends React.Component {
             selectedItem: item,
         }));
 
-        if (countrySelected) countrySelected(item);
-        if (stateSelected) stateSelected(item);
-        if (waterSelected) waterSelected(item);
-        if (spotSelected) spotSelected(item);
+        if (itemSelected) itemSelected(item);
     };
 
     renderSuggestions = () => {

@@ -25,20 +25,20 @@ const SearchBar = () => {
     const selectCountryHandler = (country) => {
         setSelectedCountry(country);
         setAvailableStates(dbStates.filter((state) => state.country_id == country.id));
+        console.log("===> selectCountryHandler > availableSpots: " + JSON.stringify(availableSpots));
     };
 
     const selectStateHandler = (state) => {
         setSelectedState(state);
         setAvailableWaters(dbWaters.filter((water) => state.id == water.state_id));
+        console.log("===> selectStateHandler > availableSpots: " + JSON.stringify(availableSpots));
     };
 
     const selectWaterHandler = (water) => {
         setSelectedWater(water);
-        console.log("===> water: " + JSON.stringify(water));
-        console.log("===> dbSpots: " + JSON.stringify(dbSpots));
-        setAvailableSpots(dbSpots.filter((spot) => spot.water_id == water.id));
-        console.log("===> Filtered Spots: " + JSON.stringify(dbSpots.filter((spot) => spot.water_id == water.id)));
-        console.log("===> availableSpots: " + JSON.stringify(availableSpots));
+        console.log("===> selectStateHandler > water: " + JSON.stringify(water));
+        console.log("===> selectStateHandler > dbSpots: " + JSON.stringify(dbSpots));
+        console.log("===> selectCountryHandler > availableSpots: " + JSON.stringify(availableSpots));
     };
 
     const selectSpotHandler = (spot) => {
@@ -53,7 +53,11 @@ const SearchBar = () => {
         return "{{disabled}}";
     };
 
-    useEffect(() => {}, [availableSpots]);
+    useEffect(() => {
+        if (selectedWater.id) {
+            setAvailableSpots(dbSpots.filter((spot) => spot.water_id == selectedWater.id));
+        }
+    }, [dbSpots, selectedWater]);
 
     return (
         <div className="container-fluid h-100">
@@ -66,7 +70,7 @@ const SearchBar = () => {
                                 <h6>Country: </h6>
                             </td>
                             <td>
-                                <TypeAheadDropDown items={dbCountries} countrySelected={selectCountryHandler} />
+                                <TypeAheadDropDown items={dbCountries} itemSelected={selectCountryHandler} />
                             </td>
                         </tr>
                         <tr>
@@ -74,7 +78,7 @@ const SearchBar = () => {
                                 <h6>State/Region: </h6>
                             </td>
                             <td>
-                                <TypeAheadDropDown items={availableStates} parent={selectedCountry} stateSelected={selectStateHandler} />
+                                <TypeAheadDropDown items={availableStates} parent={selectedCountry} itemSelected={selectStateHandler} />
                             </td>
                         </tr>
                         <tr>
@@ -82,7 +86,7 @@ const SearchBar = () => {
                                 <h6>Water: </h6>
                             </td>
                             <td>
-                                <TypeAheadDropDown items={availableWaters} parent={selectedState} waterSelected={selectWaterHandler} />
+                                <TypeAheadDropDown items={availableWaters} parent={selectedState} itemSelected={selectWaterHandler} />
                             </td>
                         </tr>
                         <tr>
@@ -90,7 +94,7 @@ const SearchBar = () => {
                                 <h6>Spot: </h6>
                             </td>
                             <td>
-                                <TypeAheadDropDown items={availableSpots} parent={selectedWater} spotSelected={selectSpotHandler} />
+                                <TypeAheadDropDown items={availableSpots} parent={selectedWater} itemSelected={selectSpotHandler} />
                             </td>
                         </tr>
                         <tr>
