@@ -111,3 +111,11 @@ td {
     padding-top: 12px;
     float: right;
 }
+
+.no-data-report {
+    text-align: center;
+}
+
+.report-body {
+    width: 60%;
+}

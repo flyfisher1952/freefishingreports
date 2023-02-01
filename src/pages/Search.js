@@ -9,21 +9,49 @@ export default class Search extends React.Component {
         super(props);
 
         this.state = {
-            searchFilters: [],
+            loading: true,
+            breadCrumbs: "",
+            reportItems: [],
+            spot: {},
+            error: null,
         };
     }
 
-    searchClickHandler = () => {};
+    fetchReports = (spot) => {
+        let url = "http://localhost:3033/report/spot/" + spot.id;
+        console.log("---> Search > fetchReports > URL: " + url);
+        fetch(url)
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    this.setState({ error: "error", loading: true });
+                }
+            })
+            .then((data) => this.setState({ reportItems: data, loading: false }))
+            .catch((error) => this.setState({ error: error, loading: false }));
+    };
+
+    componentDidUpdate(prevProps) {
+        console.log("+++> Search > componentDidUpdate > prevProps: " + JSON.stringify(prevProps));
+        console.log("+++> Search > componentDidUpdate > props: " + JSON.stringify(this.props));
+    }
+
+    searchClickHandler = (spot) => {
+        let crumbs = spot.country_code + " > " + spot.state_code + " > " + spot.water_name + " > " + spot.name;
+        this.setState({ spot: spot, breadCrumbs: crumbs });
+        this.fetchReports(spot);
+    };
 
     render() {
         return (
             <div className="container-fluid">
                 <div className="row align-items-start">
                     <div className="col-2">
-                        <SearchBar onClick={this.searchClickHandler} />
+                        <SearchBar searchButtonClick={this.searchClickHandler} />
                     </div>
                     <div className="col-8">
-                        <ReportList />
+                        <ReportList breadCrumbs={this.state.breadCrumbs} reports={this.state.reportItems} />
                     </div>
                     <div className="col-2">
                         <Adds />

@@ -3,7 +3,7 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const ReportList = () => {
+const ReportList = (props) => {
     return (
         <div className="container">
             <div className="row">
@@ -11,7 +11,7 @@ const ReportList = () => {
                     <tbody>
                         <tr>
                             <td>
-                                <b>Report Location:</b> USA - Idaho - Bear River
+                                <b>Report Location:</b> {props.breadCrumb}
                             </td>
                         </tr>
                     </tbody>
@@ -21,32 +21,31 @@ const ReportList = () => {
                 <Table className="hw-100" striped bordered hover>
                     <thead>
                         <tr>
+                            <th>Author</th>
                             <th>Date</th>
                             <th>Place</th>
-                            <th>Report</th>
+                            <th className="report-body">Report</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>20 Jun 22</td>
-                            <td>Oneida Narrows</td>
-                            <td>Great fishing on blue wing olives; nymphs early, emergers and adults at mid-day.</td>
-                        </tr>
-                        <tr>
-                            <td>20 Jun 22</td>
-                            <td>Oneida Narrows</td>
-                            <td>Great fishing on blue wing olives; nymphs early, emergers and adults at mid-day.</td>
-                        </tr>
-                        <tr>
-                            <td>20 Jun 22</td>
-                            <td>Oneida Narrows</td>
-                            <td>Great fishing on blue wing olives; nymphs early, emergers and adults at mid-day.</td>
-                        </tr>
-                        <tr>
-                            <td>20 Jun 22</td>
-                            <td>Oneida Narrows</td>
-                            <td>Great fishing on blue wing olives; nymphs early, emergers and adults at mid-day.</td>
-                        </tr>
+                        {!props.reports || props.reports.length === 0 ? (
+                            <tr>
+                                <td className="no-data-report" colSpan={4}>
+                                    No reports available
+                                </td>
+                            </tr>
+                        ) : (
+                            props.reports.map((report) => (
+                                <tr>
+                                    <td>{report.author}</td>
+                                    <td>{report.post_date}</td>
+                                    <td>
+                                        {report.spot_name}, {report.water_name}
+                                    </td>
+                                    <td className="report-body">{report.body}</td>
+                                </tr>
+                            ))
+                        )}
                     </tbody>
                 </Table>
             </div>
