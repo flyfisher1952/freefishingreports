@@ -1,50 +1,87 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable eqeqeq */
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Table } from "react-bootstrap";
-import { UseFetchCountries, UseFetchStates, UseFetchWaters, UseFetchSpots } from "./hooks/SearchBarHooks";
-import TypeAheadDropDown from "./Typeaheads/TypeAheadDropDown";
+import { AsyncTypeahead } from "react-bootstrap-typeahead";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-bootstrap-typeahead/css/Typeahead.css";
 
 const SearchBar = (props) => {
-    const dbCountries = UseFetchCountries("http://localhost:3033/country");
-    const dbStates = UseFetchStates("http://localhost:3033/state");
-    const dbWaters = UseFetchWaters("http://localhost:3033/water");
-    const dbSpots = UseFetchSpots("http://localhost:3033/spot");
-
-    const [availableStates, setAvailableStates] = useState(dbStates);
-    const [availableWaters, setAvailableWaters] = useState(dbWaters);
-    const [availableSpots, setAvailableSpots] = useState(dbSpots);
+    const [dbCountries, setDbCountries] = useState([]);
+    const [dbStates, setDbStates] = useState([]);
+    const [dbWaters, setDbWaters] = useState([]);
+    const [dbSpots, setDbSpots] = useState([]);
 
     const [selectedCountry, setSelectedCountry] = useState({});
     const [selectedState, setSelectedState] = useState({});
     const [selectedWater, setSelectedWater] = useState({});
     const [selectedSpot, setSelectedSpot] = useState({});
 
+    const [isLoadingCountries, setIsLoadingCountries] = useState(true);
+    const [isLoadingStates, setIsLoadingStates] = useState(true);
+    const [isLoadingWaters, setIsLoadingWaters] = useState(true);
+    const [isLoadingSpots, setIsLoadingSpots] = useState(true);
+
     const [buttonDisabled, setButtonDisabled] = useState(true);
 
-    const selectCountryHandler = (country) => {
-        setSelectedCountry(country);
-        setAvailableStates(dbStates.filter((state) => state.country_id == country.id));
-        setButtonDisabled(true);
+    async function getCountries() {
+        setIsLoadingCountries(true);
+
+        const response = await fetch("http://localhost:3033/country");
+        const json = await response.json();
+
+        setDbCountries(json);
+        setIsLoadingCountries(false);
+    }
+
+    async function getStates() {
+        setIsLoadingStates(true);
+        console.log("---> SearchBar > getStates > selectedCountry: " + JSON.stringify(selectedCountry));
+        console.log("---> SearchBar > getStates > selectedCountry.id: " + JSON.stringify(selectedCountry.country[0].id));
+
+        const url = "http://localhost:3033/state" + (selectedCountry.country[0]  ? "/country/" + selectedCountry.country[0].id : "");
+
+        const response = await fetch(url);
+        const json = await response.json();
+
+        setDbStates(json);
+        setIsLoadingStates(false);
+    }
+
+    async function getWaters() {
+        const url = "http://localhost:3033/water" + (selectedState && selectedState.id ? "/state/" + selectedState.id : "");
+        setIsLoadingWaters(true);
+
+        const response = await fetch(url);
+        const json = await response.json();
+
+        setDbWaters(json);
+        setIsLoadingWaters(false);
+    }
+
+    async function getSpots() {
+        setIsLoadingSpots(true);
+        const url = "http://localhost:3033/spot" + (selectedWater && selectedWater.id ? "/water/" + selectedWater.id : "");
+
+        const response = await fetch(url);
+        const json = await response.json();
+
+        setDbSpots(json);
+        setIsLoadingSpots(false);
+    }
+
+    const enableButton = () => {
+        setButtonDisabled(
+            selectedCountry && selectedCountry.id && selectedState && selectedState.id && selectedWater && selectedWater.id && selectedSpot && selectedSpot.id
+        );
     };
 
-    const selectStateHandler = (state) => {
-        setSelectedState(state);
-        setAvailableWaters(dbWaters.filter((water) => state.id == water.state_id));
-        setButtonDisabled(true);
-    };
-
-    const selectWaterHandler = (water) => {
-        setSelectedWater(water);
-        setButtonDisabled(true);
-    };
-
-    const selectSpotHandler = (spot) => {
-        setSelectedSpot(spot);
-        setButtonDisabled(false);
-    };
+    useEffect(() => {
+        enableButton();
+    }, []);
 
     const buttonClickHandler = () => {
         console.log("===> SearchBar > buttonClickHandler > spot: " + JSON.stringify(selectedSpot));
@@ -53,12 +90,6 @@ const SearchBar = (props) => {
             props.searchButtonClick(selectedSpot);
         }
     };
-
-    useEffect(() => {
-        if (selectedWater.id) {
-            setAvailableSpots(dbSpots.filter((spot) => spot.water_id == selectedWater.id));
-        }
-    }, [dbSpots, selectedWater]);
 
     return (
         <div className="container-fluid h-100">
@@ -71,7 +102,16 @@ const SearchBar = (props) => {
                                 <h6>Country: </h6>
                             </td>
                             <td>
-                                <TypeAheadDropDown items={dbCountries} itemSelected={selectCountryHandler} />
+                                <AsyncTypeahead
+                                    id="country-typeahead"
+                                    isLoading={isLoadingCountries}
+                                    labelKey={(option) => `${option.name}`}
+                                    onSearch={getCountries}
+                                    options={dbCountries}
+                                    onChange={(country) => {
+                                        setSelectedCountry({ country });
+                                    }}
+                                />
                             </td>
                         </tr>
                         <tr>
@@ -79,7 +119,16 @@ const SearchBar = (props) => {
                                 <h6>State/Region: </h6>
                             </td>
                             <td>
-                                <TypeAheadDropDown items={availableStates} parent={selectedCountry} itemSelected={selectStateHandler} />
+                                <AsyncTypeahead
+                                    id="state-typeahead"
+                                    isLoading={isLoadingStates}
+                                    labelKey={(option) => `${option.name}`}
+                                    onSearch={getStates}
+                                    options={dbStates}
+                                    onChange={(state) => {
+                                        setSelectedState({ state });
+                                    }}
+                                />
                             </td>
                         </tr>
                         <tr>
@@ -87,7 +136,16 @@ const SearchBar = (props) => {
                                 <h6>Water: </h6>
                             </td>
                             <td>
-                                <TypeAheadDropDown items={availableWaters} parent={selectedState} itemSelected={selectWaterHandler} />
+                                <AsyncTypeahead
+                                    id="water-typeahead"
+                                    isLoading={isLoadingWaters}
+                                    labelKey={(option) => `${option.name}`}
+                                    onSearch={getWaters}
+                                    options={dbWaters}
+                                    onChange={(water) => {
+                                        setSelectedWater({ water });
+                                    }}
+                                />
                             </td>
                         </tr>
                         <tr>
@@ -95,7 +153,16 @@ const SearchBar = (props) => {
                                 <h6>Spot: </h6>
                             </td>
                             <td>
-                                <TypeAheadDropDown items={availableSpots} parent={selectedWater} itemSelected={selectSpotHandler} />
+                                <AsyncTypeahead
+                                    id="spot-typeahead"
+                                    isLoading={isLoadingSpots}
+                                    labelKey={(option) => `${option.name}`}
+                                    onSearch={getSpots}
+                                    options={dbSpots}
+                                    onChange={(spot) => {
+                                        setSelectedSpot({ spot });
+                                    }}
+                                />
                             </td>
                         </tr>
                         <tr>

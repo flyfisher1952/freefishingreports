@@ -18,7 +18,7 @@ export default class Search extends React.Component {
     }
 
     fetchReports = (spot) => {
-        let url = "http://localhost:3033/report/spot/" + spot.id;
+        let url = "http://localhost:3033/report/spot/" + spot[0].id;
         console.log("---> Search > fetchReports > URL: " + url);
         fetch(url)
             .then((response) => {
@@ -32,11 +32,6 @@ export default class Search extends React.Component {
             .catch((error) => this.setState({ error: error, loading: false }));
     };
 
-    componentDidUpdate(prevProps) {
-        console.log("+++> Search > componentDidUpdate > prevProps: " + JSON.stringify(prevProps));
-        console.log("+++> Search > componentDidUpdate > props: " + JSON.stringify(this.props));
-    }
-
     searchClickHandler = (spot) => {
         let crumbs = spot.country_code + " > " + spot.state_code + " > " + spot.water_name + " > " + spot.name;
         this.setState({ spot: spot, breadCrumbs: crumbs });
@@ -47,10 +42,10 @@ export default class Search extends React.Component {
         return (
             <div className="container-fluid">
                 <div className="row align-items-start">
-                    <div className="col-2">
+                    <div className="col-3">
                         <SearchBar searchButtonClick={this.searchClickHandler} />
                     </div>
-                    <div className="col-8">
+                    <div className="col-7">
                         <ReportList breadCrumbs={this.state.breadCrumbs} reports={this.state.reportItems} />
                     </div>
                     <div className="col-2">
