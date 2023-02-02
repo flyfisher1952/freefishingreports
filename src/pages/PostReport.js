@@ -144,6 +144,7 @@ const PostReport = () => {
                                         options={dbCountries}
                                         onChange={(country) => {
                                             setSelectedCountry({ country });
+                                            setStatus("");
                                         }}
                                     />
                                 </td>
@@ -161,6 +162,7 @@ const PostReport = () => {
                                         options={dbStates}
                                         onChange={(state) => {
                                             setSelectedState({ state });
+                                            setStatus("");
                                         }}
                                     />
                                 </td>
@@ -178,6 +180,7 @@ const PostReport = () => {
                                         options={dbWaters}
                                         onChange={(water) => {
                                             setSelectedWater({ water });
+                                            setStatus("");
                                         }}
                                     />
                                 </td>
@@ -195,6 +198,7 @@ const PostReport = () => {
                                         options={dbSpots}
                                         onChange={(spot) => {
                                             setSelectedSpot({ spot });
+                                            setStatus("");
                                         }}
                                     />
                                 </td>
@@ -234,6 +238,9 @@ const PostReport = () => {
                                             ],
                                             toolbar: "undo redo | bold italic | removeformat",
                                             content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                                        }}
+                                        onEditorChange={() => {
+                                            setStatus("");
                                         }}
                                     />
                                 </td>
