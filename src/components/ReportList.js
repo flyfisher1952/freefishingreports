@@ -29,14 +29,14 @@ const ReportList = (props) => {
                     </thead>
                     <tbody>
                         {!props.reports || props.reports.length === 0 ? (
-                            <tr>
+                            <tr key='0'>
                                 <td className="no-data-report" colSpan={4}>
                                     No reports available
                                 </td>
                             </tr>
                         ) : (
                             props.reports.map((report) => (
-                                <tr>
+                                <tr key={report.id}>
                                     <td>{report.author}</td>
                                     <td>{report.post_date}</td>
                                     <td>

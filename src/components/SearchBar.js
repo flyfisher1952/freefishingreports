@@ -39,11 +39,8 @@ const SearchBar = (props) => {
 
     async function getStates() {
         setIsLoadingStates(true);
-        console.log("---> SearchBar > getStates > selectedCountry: " + JSON.stringify(selectedCountry));
-        console.log("---> SearchBar > getStates > selectedCountry.id: " + JSON.stringify(selectedCountry.country[0].id));
 
-        const url = "http://localhost:3033/state" + (selectedCountry.country[0]  ? "/country/" + selectedCountry.country[0].id : "");
-
+        const url = "http://localhost:3033/state" + (selectedCountry.country[0] ? "/country/" + selectedCountry.country[0].id : "");
         const response = await fetch(url);
         const json = await response.json();
 
@@ -52,9 +49,9 @@ const SearchBar = (props) => {
     }
 
     async function getWaters() {
-        const url = "http://localhost:3033/water" + (selectedState && selectedState.id ? "/state/" + selectedState.id : "");
         setIsLoadingWaters(true);
 
+        const url = "http://localhost:3033/water" + (selectedState.state[0] ? "/state/" + selectedState.state[0].id : "");
         const response = await fetch(url);
         const json = await response.json();
 
@@ -64,8 +61,8 @@ const SearchBar = (props) => {
 
     async function getSpots() {
         setIsLoadingSpots(true);
-        const url = "http://localhost:3033/spot" + (selectedWater && selectedWater.id ? "/water/" + selectedWater.id : "");
 
+        const url = "http://localhost:3033/spot" + (selectedWater.water[0] ? "/water/" + selectedWater.water[0].id : "");
         const response = await fetch(url);
         const json = await response.json();
 
@@ -74,20 +71,25 @@ const SearchBar = (props) => {
     }
 
     const enableButton = () => {
-        setButtonDisabled(
-            selectedCountry && selectedCountry.id && selectedState && selectedState.id && selectedWater && selectedWater.id && selectedSpot && selectedSpot.id
+        let isDisabled = !(
+            Object.hasOwn(selectedCountry, "country") &&
+            Object.hasOwn(selectedState, "state") &&
+            Object.hasOwn(selectedWater, "water") &&
+            Object.hasOwn(selectedSpot, "spot")
         );
+
+        setButtonDisabled(isDisabled);
     };
 
     useEffect(() => {
         enableButton();
-    }, []);
+    }, [selectedCountry, selectedState, selectedWater, selectedSpot]);
 
     const buttonClickHandler = () => {
         console.log("===> SearchBar > buttonClickHandler > spot: " + JSON.stringify(selectedSpot));
 
         if (props.searchButtonClick) {
-            props.searchButtonClick(selectedSpot);
+            props.searchButtonClick(selectedSpot.spot[0]);
         }
     };
 

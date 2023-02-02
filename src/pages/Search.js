@@ -18,7 +18,7 @@ export default class Search extends React.Component {
     }
 
     fetchReports = (spot) => {
-        let url = "http://localhost:3033/report/spot/" + spot[0].id;
+        let url = "http://localhost:3033/report/spot/" + spot.id;
         console.log("---> Search > fetchReports > URL: " + url);
         fetch(url)
             .then((response) => {
