@@ -27,6 +27,7 @@ const SearchBar = (props) => {
 
     const [buttonDisabled, setButtonDisabled] = useState(true);
 
+    // TODO - move these functions into their own file and share it with the PostReport component.
     async function getCountries() {
         setIsLoadingCountries(true);
 
