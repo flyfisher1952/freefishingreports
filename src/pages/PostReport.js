@@ -119,16 +119,14 @@ const PostReport = () => {
     };
 
     return (
-        <div className="container-fluid">
+        <div className="container-fluid h-100">
             <div className="row text-center">
-                <div className="col-4"></div>
-                <div className="col-4">
+                <div className="col-12">
                     <h4>Create a Report</h4>
                 </div>
-                <div className="col-4"></div>
             </div>
-            <div className="row">
-                <div className="col-3">
+            <div className="row align-items-start h-100">
+                <div className="col-3 bordered-component">
                     <Table className="table search-bar-filter">
                         <tbody>
                             <tr>
@@ -201,6 +199,21 @@ const PostReport = () => {
                                             setStatus("");
                                         }}
                                     />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="report-guidelines" colSpan={2}>
+                                    Please just focus on the quality of the fishing (Great, Good, Fair, Poor, etc.) and what worked (types of flies, lures,
+                                    bait, etc.) If a certain time of day was best you might include that.
+                                    <br />
+                                    <br />
+                                    Please avoid anything that isn't directly about fishing (climate change, etc.)
+                                    <br />
+                                    <br />
+                                    This is a Wiki-style site, so you are being trusted to stick to the subject.
+                                    <br />
+                                    <br />
+                                    -- Thanks
                                 </td>
                             </tr>
                         </tbody>

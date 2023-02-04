@@ -68,11 +68,19 @@ td {
     text-align: center;
 }
 
+.report-col-gap {
+    margin-left: 4px;
+    margin-right: 4px;
+}
 .report-body {
     width: 60%;
+}
+
+.report-guidelines {
+    font-size: smaller;
 }
 
 /* hide the AsyncTypeahead spinner */
 .rbt-loader {
     display: none;
-  }
+}
