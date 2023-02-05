@@ -84,3 +84,12 @@ td {
 .rbt-loader {
     display: none;
 }
+
+.user-input {
+    width: 200px;
+}
+
+.user-input-dropdown {
+    max-width: 200px;
+    padding: 6px !important;
+}
