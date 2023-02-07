@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 export function fetchCountries(url) {
     return new Promise((resolve) => {
-        async function fetchCountries() {
+        async function getCountries() {
             const response = await fetch(url);
             const json = await response.json();
 
@@ -11,7 +11,7 @@ export function fetchCountries(url) {
         }
 
         useEffect(() => {
-            fetchCountries();
+            getCountries();
         }, []);
     });
 }

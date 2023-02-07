@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
 import Adds from "../components/Adds";

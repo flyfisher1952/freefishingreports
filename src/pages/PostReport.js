@@ -86,6 +86,7 @@ const PostReport = () => {
 
     useEffect(() => {
         enableButton();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedCountry, selectedState, selectedWater, selectedSpot]);
 
     const postIt = async () => {
