@@ -5,6 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "console": "integratedTerminal",
+            "cwd": "${workspaceRoot}",
+            "name": "Launch ASYNC Debug",
+            "outFiles": ["${workspaceRoot}/dist/*.js"],
+            "runtimeArgs": ["start"],
+            "runtimeExecutable": "npm",
+            "request": "launch",
+            "skipFiles": ["<node_internals>/**"],
+            "smartStep": true,
+            "sourceMaps": true,
+            "type": "node"
+        },
+        {
             "name": "Launch via NPM",
             "request": "launch",
             "runtimeArgs": ["start"],
