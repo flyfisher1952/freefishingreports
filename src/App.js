@@ -10,6 +10,7 @@ import PostReport from "./pages/PostReport";
 import Signin from "./pages/Signin";
 
 import "./App.css";
+import "./ffr.scss";
 
 function App() {
     return (

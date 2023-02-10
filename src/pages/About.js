@@ -6,10 +6,10 @@ const About = () => {
     return (
         <div className="container-fluid">
             <div className="row h-100">
-                <div className="col-3">
+                <div className="col-2">
                     <SolunarDay />
                 </div>
-                <div className="col-6">
+                <div className="col-8">
                     <div className="row text-center">
                         <div className="col-12">
                             <h4>What this web-site is all about.</h4>
@@ -44,7 +44,7 @@ const About = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-3">
+                <div className="col-2">
                     <Adds />
                 </div>
             </div>

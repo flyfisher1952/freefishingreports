@@ -93,3 +93,7 @@ td {
     max-width: 200px;
     padding: 6px !important;
 }
+
+.hidden {
+    display: none;
+}
