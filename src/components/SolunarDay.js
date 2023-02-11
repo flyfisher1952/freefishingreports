@@ -49,8 +49,17 @@ const SolunarDay = (props) => {
 
     const LoadedDisplay = () => {
         return (
-            <div className="row justify-content-center h-100">
-                <div className="col hidden-md-down text-center" dangerouslySetInnerHTML={{ __html: solunarDay }}></div>
+            <div className="center-text h-100">
+                <div className="row justify-content-center center-text">
+                    <div className="col small-header">
+                        <span>
+                            <a href="https://solunarforecast.com/solunarcalendar.aspx/" target="_blank" rel="noreferrer">SolunarForcast.com</a>
+                        </span>
+                    </div>
+                </div>
+                <div className="row justify-content-center center-text">
+                    <div className="col hidden-md-down text-center" dangerouslySetInnerHTML={{ __html: solunarDay }}></div>
+                </div>
             </div>
         );
     };

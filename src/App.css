@@ -97,3 +97,15 @@ td {
 .hidden {
     display: none;
 }
+
+.center-text {
+    text-align: center;
+}
+
+.small-header {
+    text-align: center;
+    font-size: smaller;
+    border-collapse: collapse;
+    border-bottom: 1px solid lightgray;
+    width: auto;
+}
