@@ -49,8 +49,8 @@ const Signin = () => {
 
     return (
         <div className="container-fluid">
-            <div className="row justify-content-between h-100">
-                <div className="col-3">
+            <div className="row justify-content-between">
+                <div className="col-2">
                     <SolunarDay />
                 </div>
                 <div className="col-3 bordered-component">
@@ -163,7 +163,7 @@ const Signin = () => {
                         </tbody>
                     </Table>
                 </div>
-                <div className="col-3">
+                <div className="col-2">
                     <Adds />
                 </div>
             </div>

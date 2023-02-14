@@ -6,19 +6,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const Home = () => {
     return (
-        <div className="container-fluid h-100">
-            <div className="row align-items-start h-100">
-                <div className="col-2">
-                    <SolunarDay />
-                </div>
-                <div className="col-8">
-                    <Blog />
-                </div>
-                <div className="col-2">
-                    <Adds />
+        <>
+            <div className="container-fluid h-100">
+                <div className="row align-items-start h-100">
+                    <div className="col-2">
+                        <SolunarDay />
+                    </div>
+                    <div className="col-8">
+                        <Blog />
+                    </div>
+                    <div className="col-2">
+                        <Adds />
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 
