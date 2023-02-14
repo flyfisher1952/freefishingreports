@@ -42,7 +42,7 @@ const ReportList = (props) => {
                                     <td>
                                         {report.spot_name}, {report.water_name}
                                     </td>
-                                    <td className="report-body">{report.body}</td>
+                                    <td className="report-body" dangerouslySetInnerHTML={{__html: report.body}}></td>
                                 </tr>
                             ))
                         )}
