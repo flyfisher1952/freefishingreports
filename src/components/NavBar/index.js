@@ -10,7 +10,8 @@ function Navbar() {
                     <NavLink to="/Search"> Find a Report </NavLink>
                     <NavLink to="/PostReport"> Post a Report </NavLink>
                     <NavLink to="/About"> About </NavLink>
-                    <NavLink to="/Signin"> Signin/Up </NavLink>
+                    <NavLink to="/Signin"> Signin </NavLink>
+                    <NavLink to="/Register"> Register </NavLink>
                 </NavMenu>
             </Nav>
         </>

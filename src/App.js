@@ -8,6 +8,7 @@ import Search from "./pages/Search";
 import About from "./pages/About";
 import PostReport from "./pages/PostReport";
 import Signin from "./pages/Signin";
+import Register from "./pages/Register";
 
 import "./App.css";
 import "./ffr.scss";
@@ -27,6 +28,7 @@ function App() {
                         <Route path="/PostReport" element={<PostReport />}></Route>
                         <Route path="/About" element={<About />}></Route>
                         <Route path="/Signin" element={<Signin />}></Route>
+                        <Route path="/Register" element={<Register />}></Route>
                     </Routes>
                 </Router>
             </div>

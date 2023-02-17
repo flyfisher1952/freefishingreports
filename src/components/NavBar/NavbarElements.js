@@ -17,11 +17,13 @@ export const NavLink = styled(Link)`
     display: flex;
     align-items: center;
     text-decoration: none;
-    padding: 0 1rem;
+    padding: 0 1rem .3rem 1rem;
     height: 100%;
     cursor: pointer;
     &.active {
         color: #000000;
+        border-bottom: .3rem solid chartreuse;
+        padding: 0 1rem;
     }
 `;
 

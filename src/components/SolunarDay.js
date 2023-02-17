@@ -3,12 +3,12 @@
 import React, { useState, useEffect } from "react";
 import Spinner from "react-bootstrap/Spinner";
 
-// the next 2 are for the HTML returned from Solunar Day.
+// the next 1 is for the HTML returned from Solunar Day.
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { solid, regular, brands, icon } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+// import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css";
 
 const SolunarDay = (props) => {
     const [solunarDay, setSolunarDay] = useState("");
@@ -23,7 +23,7 @@ const SolunarDay = (props) => {
             response.text().then((html) => {
                 html = html.replace("/images/moonimages", "https://solunarforecast.com/images/moonimages");
                 for (let ii = 0; ii < 9; ii++) {
-                    html = html.replace('<span class="glyphicon glyphicon-star"></span>', '<i class="fa-regular fa-star-sharp"></i>');
+                    html = html.replace('<span class="glyphicon glyphicon-star"></span>', '<i class="fa-solid fa-star-sharp"></i>');
                 }
                 setSolunarDay(html);
                 setIsLoading(false);
@@ -53,7 +53,9 @@ const SolunarDay = (props) => {
                 <div className="row justify-content-center center-text">
                     <div className="col small-header">
                         <span>
-                            <a href="https://solunarforecast.com/solunarcalendar.aspx/" target="_blank" rel="noreferrer">SolunarForcast.com</a>
+                            <a href="https://solunarforecast.com/solunarcalendar.aspx/" target="_blank" rel="noreferrer">
+                                SolunarForcast.com
+                            </a>
                         </span>
                     </div>
                 </div>

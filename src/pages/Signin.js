@@ -81,7 +81,7 @@ const Signin = () => {
                                 <td>
                                     <input
                                         className="form-control user-input"
-                                        type="hidden"
+                                        type="password"
                                         value={password}
                                         onChange={(e) => {
                                             SetPassword(e.target.value);
