@@ -109,3 +109,10 @@ td {
     border-bottom: 1px solid lightgray;
     width: auto;
 }
+
+.invalid-input {
+    border-collapse: collapse;
+    border: solid 0.13em red;
+    border-radius: 0.375rem;
+    padding: 0.375rem 0.75rem;
+}
