@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-// import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css";
 
 const SolunarDay = (props) => {
     const [solunarDay, setSolunarDay] = useState("");
@@ -48,15 +47,20 @@ const SolunarDay = (props) => {
     };
 
     const LoadedDisplay = () => {
+        const aStyle = {
+            paddingBottom: "10px",
+            fontSize: "larger",
+        };
+
         return (
             <div className="center-text h-100">
                 <div className="row justify-content-center center-text">
                     <div className="col small-header">
-                        <span>
+                        <div style={aStyle}>
                             <a href="https://solunarforecast.com/solunarcalendar.aspx/" target="_blank" rel="noreferrer">
                                 SolunarForcast.com
                             </a>
-                        </span>
+                        </div>
                     </div>
                 </div>
                 <div className="row justify-content-center center-text">
