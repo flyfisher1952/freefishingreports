@@ -86,7 +86,7 @@ const PostReport = () => {
 
     useEffect(() => {
         enableButton();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedCountry, selectedState, selectedWater, selectedSpot]);
 
     const postIt = async () => {
@@ -127,100 +127,87 @@ const PostReport = () => {
                 </div>
             </div>
             <div className="row align-items-start h-100">
-                <div className="col-3 bordered-component">
-                    <Table className="table search-bar-filter">
-                        <tbody>
-                            <tr>
-                                <td className="dd-label-cell">
-                                    <h6>Country: </h6>
-                                </td>
-                                <td>
-                                    <AsyncTypeahead
-                                        id="country-typeahead"
-                                        isLoading={isLoadingCountries}
-                                        labelKey={(option) => `${option.name}`}
-                                        onSearch={getCountries}
-                                        options={dbCountries}
-                                        onChange={(country) => {
-                                            setSelectedCountry({ country });
-                                            setStatus("");
-                                        }}
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="dd-label-cell">
-                                    <h6>State/Region: </h6>
-                                </td>
-                                <td>
-                                    <AsyncTypeahead
-                                        id="state-typeahead"
-                                        isLoading={isLoadingStates}
-                                        labelKey={(option) => `${option.name}`}
-                                        onSearch={getStates}
-                                        options={dbStates}
-                                        onChange={(state) => {
-                                            setSelectedState({ state });
-                                            setStatus("");
-                                        }}
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="dd-label-cell">
-                                    <h6>Water: </h6>
-                                </td>
-                                <td>
-                                    <AsyncTypeahead
-                                        id="water-typeahead"
-                                        isLoading={isLoadingWaters}
-                                        labelKey={(option) => `${option.name}`}
-                                        onSearch={getWaters}
-                                        options={dbWaters}
-                                        onChange={(water) => {
-                                            setSelectedWater({ water });
-                                            setStatus("");
-                                        }}
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="dd-label-cell">
-                                    <h6>Spot: </h6>
-                                </td>
-                                <td>
-                                    <AsyncTypeahead
-                                        id="spot-typeahead"
-                                        isLoading={isLoadingSpots}
-                                        labelKey={(option) => `${option.name}`}
-                                        onSearch={getSpots}
-                                        options={dbSpots}
-                                        onChange={(spot) => {
-                                            setSelectedSpot({ spot });
-                                            setStatus("");
-                                        }}
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="report-guidelines" colSpan={2}>
-                                    Please just focus on the quality of the fishing (Great, Good, Fair, Poor, etc.) and what worked (types of flies, lures,
-                                    bait, etc.) If a certain time of day was best you might include that.
-                                    <br />
-                                    <br />
-                                    Please avoid anything that isn't directly about fishing (climate change, etc.)
-                                    <br />
-                                    <br />
-                                    This is a Wiki-style site, so you are being trusted to stick to the subject.
-                                    <br />
-                                    <br />
-                                    -- Thanks
-                                </td>
-                            </tr>
-                        </tbody>
-                    </Table>
+                <div className="col-3">
+                    <div className="bordered-component">
+                        <Table className="table search-bar-filter">
+                            <tbody>
+                                <tr>
+                                    <td className="dd-label-cell">
+                                        <h6>Country: </h6>
+                                    </td>
+                                    <td>
+                                        <AsyncTypeahead
+                                            id="country-typeahead"
+                                            isLoading={isLoadingCountries}
+                                            labelKey={(option) => `${option.name}`}
+                                            onSearch={getCountries}
+                                            options={dbCountries}
+                                            onChange={(country) => {
+                                                setSelectedCountry({ country });
+                                                setStatus("");
+                                            }}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="dd-label-cell">
+                                        <h6>State/Region: </h6>
+                                    </td>
+                                    <td>
+                                        <AsyncTypeahead
+                                            id="state-typeahead"
+                                            isLoading={isLoadingStates}
+                                            labelKey={(option) => `${option.name}`}
+                                            onSearch={getStates}
+                                            options={dbStates}
+                                            onChange={(state) => {
+                                                setSelectedState({ state });
+                                                setStatus("");
+                                            }}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="dd-label-cell">
+                                        <h6>Water: </h6>
+                                    </td>
+                                    <td>
+                                        <AsyncTypeahead
+                                            id="water-typeahead"
+                                            isLoading={isLoadingWaters}
+                                            labelKey={(option) => `${option.name}`}
+                                            onSearch={getWaters}
+                                            options={dbWaters}
+                                            onChange={(water) => {
+                                                setSelectedWater({ water });
+                                                setStatus("");
+                                            }}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="dd-label-cell">
+                                        <h6>Spot: </h6>
+                                    </td>
+                                    <td>
+                                        <AsyncTypeahead
+                                            id="spot-typeahead"
+                                            isLoading={isLoadingSpots}
+                                            labelKey={(option) => `${option.name}`}
+                                            onSearch={getSpots}
+                                            options={dbSpots}
+                                            onChange={(spot) => {
+                                                setSelectedSpot({ spot });
+                                                setStatus("");
+                                            }}
+                                        />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                    </div>
                 </div>
-                <div className="col-6">
+                <div className="col-6 bordered-component">
                     <Table>
                         <tbody>
                             <tr>
@@ -271,6 +258,18 @@ const PostReport = () => {
                             </tr>
                         </tbody>
                     </Table>
+                    <div className="row text-center">
+                        <span>
+                            Please just focus on the quality of the fishing (Great, Good, Fair, Poor, etc.) and what worked (types of flies, lures, bait, etc.)
+                            If a certain time of day was best you might include that.
+                            <br />
+                            Please avoid anything that isn't directly about fishing (climate change, etc.)
+                            <br />
+                            This is a Wiki-style site, so you are being trusted to stick to the subject.
+                            <br />
+                            -- Thanks
+                        </span>
+                    </div>
                 </div>
                 <div className="col-3">
                     <Adds />

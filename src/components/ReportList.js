@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const ReportList = (props) => {
     return (
-        <div className="container">
+        <div className="container-fluid bordered-component">
             <div className="row">
                 <Table className="hw-100" bordered>
                     <tbody>

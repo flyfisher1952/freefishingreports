@@ -14,16 +14,22 @@ export const Nav = styled.nav`
 
 export const NavLink = styled(Link)`
     color: #808080;
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     text-decoration: none;
     padding: 0 1rem .3rem 1rem;
     height: 100%;
     cursor: pointer;
+    &.hover {
+        background-color: rgb(238, 234, 230);
+    }
     &.active {
         color: #000000;
-        border-bottom: .3rem solid chartreuse;
+        border-bottom: .3rem solid #009900;
+        border-radius: .3rem;
         padding: 0 1rem;
+        background-color: rgb(228, 224, 220);
     }
 `;
 

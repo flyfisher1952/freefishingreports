@@ -5,16 +5,16 @@ import Adds from "../components/Adds";
 const About = () => {
     return (
         <div className="container-fluid">
-            <div className="row h-100">
-                <div className="col-2">
-                    <SolunarDay />
-                </div>
-                <div className="col-8">
                     <div className="row text-center">
                         <div className="col-12">
                             <h4>What this web-site is all about.</h4>
                         </div>
                     </div>
+            <div className="row h-100">
+                <div className="col-2">
+                    <SolunarDay />
+                </div>
+                <div className="col-8">
                     <div className="row">
                         <div className="col-12">
                             <div className="bordered-component">

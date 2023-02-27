@@ -32,7 +32,7 @@ const Signin = () => {
                 <div className="col-2">
                     <SolunarDay />
                 </div>
-                <div className="col-3 bordered-component">
+                <div className="col-3 shadow p-3 mb-5 bg-white rounded">
                     <Table>
                         <tbody>
                             <tr>

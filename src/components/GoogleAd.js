@@ -1,14 +1,19 @@
 import React from "react";
-import ReactGA from 'react-ga';
 
-class GoogleAd {
-    render() {
-        return (
-            <div>
-                <ins className="adsbygoogle" style={{ display: "block" }} data-ad-client="ca-pub-23452425" data-ad-slot="24524524" data-ad-format="auto"></ins>{" "}
+const GoogleAd = () => {
+    return (
+        <div className="container-fluid">
+            <div className="row">
+                <div className="col-12 bordered-component text-center">
+                    <h1>
+                        Google Ads
+                        <br />
+                        TBD
+                    </h1>
+                </div>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 export default GoogleAd;
