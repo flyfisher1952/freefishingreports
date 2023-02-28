@@ -253,7 +253,6 @@ const Register = () => {
                                             id="country-typeahead"
                                             className="form-control user-input-dropdown"
                                             isLoading={isLoadingCountries}
-                                            labelKey={(option) => `${option.name}`}
                                             onSearch={getCountries}
                                             options={dbCountries}
                                             onChange={(country) => setSelectedCountry({ country })}

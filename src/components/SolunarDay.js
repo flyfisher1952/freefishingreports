@@ -22,7 +22,7 @@ const SolunarDay = (props) => {
             response.text().then((html) => {
                 html = html.replace("/images/moonimages", "https://solunarforecast.com/images/moonimages");
                 for (let ii = 0; ii < 9; ii++) {
-                    html = html.replace('<span class="glyphicon glyphicon-star"></span>', '<i class="fa-solid fa-star-sharp"></i>');
+                    html = html.replace('<span class="glyphicon glyphicon-star"></span>', '<i class="fa-sharp fa-solid fa-star-sharp"></i>');
                 }
                 setSolunarDay(html);
                 setIsLoading(false);
@@ -71,7 +71,18 @@ const SolunarDay = (props) => {
     };
 
     useEffect(() => {
+        const script = document.createElement("script");
+
+        script.src = "https://kit.fontawesome.com/3eab3a5653.js";
+        script.async = true;
+        script.crossOrigin = "anonymous";
+        document.body.appendChild(script);
+
         fetchSolunarDay();
+
+        return () => {
+            document.body.removeChild(script);
+        };
     }, []);
 
     return (
