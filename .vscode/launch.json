@@ -8,7 +8,7 @@
             "console": "integratedTerminal",
             "cwd": "${workspaceRoot}",
             "name": "Launch ASYNC Debug",
-            "outFiles": ["${workspaceRoot}/dist/*.js"],
+            "outFiles": ["${workspaceRoot}/build/static/js/*.js"],
             "runtimeArgs": ["start"],
             "runtimeExecutable": "npm",
             "request": "launch",

@@ -121,11 +121,13 @@ const Register = () => {
         });
         const responseObject = await response.json();
 
-        // if (response.status === 200 && responseObject.affectedRows === 1) {
-        //     setStatus("Report Submitted successfully.");
-        // } else {
-        //     setStatus("Report Submition Failed.");
-        // }
+        console.log("---> Register.register: response %s", JSON.stringify(responseObject));
+
+        if (response.status === 200 && responseObject.affectedRows === 1) {
+            setStatus("Registered, verification email sent.");
+        } else {
+            setStatus("Registration Failed.");
+        }
     };
 
     useEffect(() => {
@@ -267,7 +269,7 @@ const Register = () => {
                                             overlay={
                                                 <Popover id="country-info-popover">
                                                     <PopoverBody>
-                                                        Your country is required so that we can show you the appropriate Solunar forecast from 
+                                                        Your country is required so that we can show you the appropriate Solunar forecast from
                                                         <a href="https://solunarforecast.com/solunarcalendar.aspx/">SolunarForecast.com</a>.
                                                     </PopoverBody>
                                                 </Popover>
@@ -300,7 +302,7 @@ const Register = () => {
                                             overlay={
                                                 <Popover id="postalCode-info-popover">
                                                     <PopoverBody>
-                                                        Your postal code is required so that we can show you the appropriate Solunar forecast from 
+                                                        Your postal code is required so that we can show you the appropriate Solunar forecast from
                                                         <a href="https://solunarforecast.com/solunarcalendar.aspx/">SolunarForecast.com</a>.
                                                     </PopoverBody>
                                                 </Popover>

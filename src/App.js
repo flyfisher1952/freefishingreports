@@ -11,7 +11,6 @@ import Signin from "./pages/Signin";
 import Register from "./pages/Register";
 
 import "./App.css";
-import "./ffr.scss";
 
 function App() {
     return (

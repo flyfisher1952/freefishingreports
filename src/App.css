@@ -119,3 +119,18 @@ td {
 .valid-input {
     color: green;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* TODO - Explanation popover */
+a[rel="popover"] {
+    display: none !important;
+}
+
+.status-message {
+    font-style: italic;
+    font-size: small;
+    color: darkred;
+}

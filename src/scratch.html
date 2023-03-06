@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <!-- Place your kit's code here -->
+        <script src="https://kit.fontawesome.com/3eab3a5653.js" crossorigin="anonymous"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"
+        ></script>
+        <style>
+            .panel {
+                background-color: rgb(188, 232, 241);
+            }
+            .hidden {
+                display: inline-block;
+            }
+
+            /*********************************************************************************************************
+             * Demo Selectors
+             *********************************************************************************************************/
+            a {
+                text-decoration: none;
+                color: black !important;
+                font-weight: bold;
+            }
+
+            .popover__title {
+                font-size: 1.2rem;
+                line-height: 1.25rem;
+                text-decoration: none;
+                color: black;
+                text-align: center;
+                padding: 25px 0;
+            }
+
+            .popover__wrapper {
+                position: relative;
+                margin-top: 2.5rem;
+                display: inline-block;
+            }
+            .popover__content {
+                opacity: 0;
+                visibility: hidden;
+                position: absolute;
+                left: -150px;
+                transform: translate(0, 10px);
+                background-color: #bfbfbf;
+                padding: 1.5rem;
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+                width: auto;
+            }
+            .popover__content:before {
+                position: absolute;
+                z-index: -1;
+                content: "";
+                right: calc(50% - 10px);
+                top: -8px;
+                border-style: solid;
+                border-width: 0 10px 10px 10px;
+                border-color: transparent transparent #bfbfbf transparent;
+                transition-duration: 0.3s;
+                transition-property: transform;
+            }
+            .popover__wrapper:hover .popover__content {
+                z-index: 10;
+                opacity: 1;
+                visibility: visible;
+                transform: translate(0, -20px);
+                transition: all 0.5s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+            }
+            .popover__message {
+                text-align: center;
+            }
+
+            /*********************************************************************************************************
+             * My Selectors
+             *********************************************************************************************************/
+            .popover-wrapper {
+                position: relative;
+                margin-top: 1.2rem;
+                display: inline-block;
+            }
+            .popover-heading {
+                font-size: 1.2rem;
+                line-height: 1.25rem;
+                text-decoration: none;
+                color: black;
+                text-align: center;
+                padding: 1.5rem 0;
+            }
+            .popover-heading:before {
+                position: absolute;
+                z-index: -1;
+                content: "";
+                right: calc(50% - 10px);
+                top: -8px;
+                border-style: solid;
+                border-width: 0 10px 10px 10px;
+                border-color: transparent transparent #bfbfbf transparent;
+                transition-duration: 0.3s;
+                transition-property: transform;
+            }
+            .popover-body {
+                opacity: 0;
+                visibility: hidden;
+                position: absolute;
+                left: -150px;
+                transform: translate(0, 10px);
+                background-color: #bfbfbf;
+                padding: 1.5rem;
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+                width: auto;
+            }
+            .popover-body:before {
+                position: absolute;
+                z-index: -1;
+                content: "";
+                right: calc(50% - 10px);
+                top: -8px;
+                border-style: solid;
+                border-width: 0 10px 10px 10px;
+                border-color: transparent transparent #bfbfbf transparent;
+                transition-duration: 0.3s;
+                transition-property: transform;
+            }
+            .popover-wrapper:hover .popover-body {
+                z-index: 10;
+                opacity: 1;
+                visibility: visible;
+                transform: translate(0, -20px);
+                transition: all 0.5s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+            }
+
+            div[class="hidden"][id~="btn-"] {
+                opacity: 0;
+                visibility: hidden;
+                position: absolute;
+                left: -150px;
+                transform: translate(0, 10px);
+                background-color: #bfbfbf;
+                padding: 1.5rem;
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+                width: auto;
+            }
+            div[class="hidden"][id~="btn-"]:before {
+                position: relative;
+                margin-top: 2.5rem;
+                display: inline-block;
+                color: black;
+            }
+            div[class="hidden"][id~="btn-"]:hover {
+                position: relative;
+                margin-top: 2.5rem;
+                display: inline-block;
+                color: black;
+            }
+            /* div[class="popover-heading"] {
+                font-size: 1.4rem;
+                line-height: 1.6rem;
+                text-decoration: none;
+                color: rgb(0, 0, 0);
+                text-align: center;
+                padding: 25px 0;
+                background-color: rgb(165, 196, 253);
+                border-bottom: black solid 2px;
+            }
+            div[class="popover-body"] {
+                opacity: 0;
+                visibility: hidden;
+                position: absolute;
+                left: -150px;
+                transform: translate(0, 10px);
+                background-color: #bfbfbf;
+                padding: 1.5rem;
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+                width: auto;
+            }
+            div[class="popover-body"] {
+                position: absolute;
+                z-index: -1;
+                content: "";
+                right: calc(50% - 10px);
+                top: -8px;
+                border-style: solid;
+                border-width: 0 10px 10px 10px;
+                border-color: transparent transparent #bfbfbf transparent;
+                transition-duration: 0.3s;
+                transition-property: transform;
+            }
+            div[id~="btn-"] div[class="popover-body"] {
+                z-index: 10;
+                opacity: 1;
+                visibility: visible;
+                transform: translate(0, -20px);
+                transition: all 0.5s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+            } */
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-3">
+                    <div class="panel panel-info" style="margin-right: -12px; margin-left: -12px">
+                        <div class="panel-body-two-panel-info">
+                            <h4 class="text-center">
+                                Saturday<br />03/04/23<br /><i class="fa-sharp fa-solid fa-star-sharp"></i><i class="fa-sharp fa-solid fa-star-sharp"></i>
+                            </h4>
+                            <p class="text-center"><strong>Major Times</strong><br />9:48 AM-11:48 AM<br />10:11 PM-12:11 AM</p>
+                            <p class="text-center"><strong>Minor Times</strong><br /><strong>5:34 AM-6:34 AM</strong><br />3:07 PM-4:07 PM</p>
+                            <p class="text-center">
+                                <strong>Day Rating</strong><br /><i class="fa-sharp fa-solid fa-star-sharp"></i><i class="fa-sharp fa-solid fa-star-sharp"></i
+                                ><br /><strong>Good++</strong>
+                            </p>
+                            <p class="text-center"><strong>Sun Data</strong><br /><strong>Rise: 6:58 AM</strong><br />Set: 6:21 PM</p>
+                            <p class="text-center"><strong>Day Length</strong><br />11 hrs. 23 mins.</p>
+                            <p class="text-center">
+                                <strong>Moon Data</strong><br />Rise: 3:37 PM<br /><strong>Set: 6:04 AM</strong><br />Over: 11:11 PM<br />Under: 10:48 AM
+                            </p>
+                            <p class="text-center">
+                                <strong>Moon Phase</strong><br /><img
+                                    src="https://solunarforecast.com/images/moonimages/waxing93percent.png"
+                                    width="60"
+                                    height="60"
+                                    alt="Moon Phase is 93% percent waxing gibbous"
+                                    title="Moon Phase is 93% percent waxing gibbous"
+                                /><br />93%<br />waxing<br />gibbous
+                            </p>
+                            <div class="text-center">
+                                <a href="#"><span class="text-info">Explanation</span></a>
+                            </div>
+                            <div class="hidden" id="btn-4">
+                                <div class="popover-heading">
+                                    <h5 class="text-center">
+                                        <strong>Hunting &amp; Fishing Day Explanation</strong><br /><br />Saturday 03/04/23<br />
+                                        <i class="fa-sharp fa-solid fa-star-sharp"></i>
+                                        <i class="fa-sharp fa-solid fa-star-sharp"></i>
+                                        <br />Mendon<br />Utah (US)
+                                    </h5>
+                                </div>
+                                <div class="popover-body">
+                                    <p class="text-center"><strong>Hunting And Fishing Day Rating</strong></p>
+                                    Best hunting and fishing times prediction near the area of Mendon Utah for the date of Saturday, 03/04/2023 are based on the
+                                    moon being 93% illuminated and is rated as a 2 star or Good day. As the moon transitions to a Full or New moon the
+                                    predicated value will rise.<br /><br />
+                                    <p class="text-center"><strong>Hunting And Fishing Peak Times</strong></p>
+                                    Because this minor period occurs within 30 minutes to an hour of a sunrise and the moon is also setting during this time
+                                    which actually gives this day a heightened peak time rating of <strong>Good++</strong> and should give you great hunting and
+                                    fishing action during the bolded period.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="panel panel-info" style="margin-right: -12px; margin-left: -12px">
+                        <div class="panel-body-two-panel-info text-center">
+                            <h4 class="text-center">
+                                Saturday<br />03/04/23<br /><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>
+                            </h4>
+                            <p class="text-center"><strong>Major Times</strong><br />9:48 AM-11:48 AM<br />10:11 PM-12:11 AM</p>
+                            <p class="text-center"><strong>Minor Times</strong><br /><strong>5:34 AM-6:34 AM</strong><br />3:07 PM-4:07 PM</p>
+                            <p class="text-center">
+                                <strong>Day Rating</strong><br /><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span
+                                ><br /><strong>Good++</strong>
+                            </p>
+                            <p class="text-center"><strong>Sun Data</strong><br /><strong>Rise: 6:58 AM</strong><br />Set: 6:21 PM</p>
+                            <p class="text-center"><strong>Day Length</strong><br />11 hrs. 23 mins.</p>
+                            <p class="text-center">
+                                <strong>Moon Data</strong><br />Rise: 3:37 PM<br /><strong>Set: 6:04 AM</strong><br />Over: 11:11 PM<br />Under: 10:48 AM
+                            </p>
+                            <p class="text-center">
+                                <strong>Moon Phase</strong><br /><img
+                                    src="https://solunarforecast.com/images/moonimages/waxing93percent.png"
+                                    width="60"
+                                    height="60"
+                                    alt="Moon Phase is 93% percent waxing gibbous"
+                                    title="Moon Phase is 93% percent waxing gibbous"
+                                /><br />93%<br />waxing<br />gibbous
+                            </p>
+                            <script>
+                                const explanationClick = () => {
+                                    $("div[class='hidden']").addClass('not-hidden');
+                                };
+                            </script>
+                            <a
+                                class="btn btn-link center-block"
+                                rel="popover"
+                                onclick="explanationClick()"
+                                data-placement="auto"
+                                data-style="primary"
+                                data-popover-content="#btn-4"
+                                data-toggle="popover"
+                                data-trigger="focus"
+                                tabindex="0"
+                                data-original-title=""
+                                title=""
+                                ><span class="text-info">Explanation</span></a
+                            >
+                            <div class="hidden" id="btn-4">
+                                <div class="popover-heading">
+                                    <h5 class="text-center">
+                                        <strong>Hunting &amp; Fishing Day Explanation</strong><br /><br />Saturday 03/04/23<br /><span
+                                            class="glyphicon glyphicon-star"
+                                        ></span
+                                        ><span class="glyphicon glyphicon-star"></span><br />Mendon<br />Utah (US)
+                                    </h5>
+                                </div>
+                                <div class="popover-body">
+                                    <p class="text-center"><strong>Hunting And Fishing Day Rating</strong></p>
+                                    Best hunting and fishing times prediction near the area of Mendon Utah for the date of Saturday, 03/04/2023 are based on the
+                                    moon being 93% illuminated and is rated as a 2 star or Good day. As the moon transitions to a Full or New moon the
+                                    predicated value will rise.<br /><br />
+                                    <p class="text-center"><strong>Hunting And Fishing Peak Times</strong></p>
+                                    Because this minor period occurs within 30 minutes to an hour of a sunrise and the moon is also setting during this time
+                                    which actually gives this day a heightened peak time rating of <strong>Good++</strong> and should give you great hunting and
+                                    fishing action during the bolded period.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

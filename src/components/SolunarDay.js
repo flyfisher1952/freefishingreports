@@ -20,10 +20,13 @@ const SolunarDay = (props) => {
             const response = await fetch("http://localhost:3033/solunarDay/" + countryCode + "/" + postalCode);
 
             response.text().then((html) => {
+                const day = new Date().getDay();
                 html = html.replace("/images/moonimages", "https://solunarforecast.com/images/moonimages");
-                for (let ii = 0; ii < 9; ii++) {
+
+                for (let ii = 0; ii < 12; ii++) {
                     html = html.replace('<span class="glyphicon glyphicon-star"></span>', '<i class="fa-sharp fa-solid fa-star-sharp"></i>');
                 }
+                
                 setSolunarDay(html);
                 setIsLoading(false);
             });
@@ -58,7 +61,7 @@ const SolunarDay = (props) => {
                     <div className="col small-header">
                         <div style={aStyle}>
                             <a href="https://solunarforecast.com/solunarcalendar.aspx/" target="_blank" rel="noreferrer">
-                                SolunarForcast.com
+                                Full Solunar Calendar
                             </a>
                         </div>
                     </div>
