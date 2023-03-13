@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Adds from "../components/Adds";
-import SolunarDay from "../components/SolunarDay";
+import Adds from "../components/adds/Adds";
+import SolunarDay from "../components/solunar/SolunarDay";
 import { Button, OverlayTrigger, Table, Popover, PopoverBody } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleQuestion } from "@fortawesome/free-regular-svg-icons";
+import { User } from "../components/user/User";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-typeahead/css/Typeahead.css";
@@ -15,6 +16,8 @@ const Signin = () => {
     const [password, SetPassword] = useState("");
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [status, setStatus] = useState("");
+
+    const storage = window["localStorage"];
 
     const signIn = async () => {
         const credentials = {
@@ -36,10 +39,12 @@ const Signin = () => {
 
         console.log("---> Signin.signIn: response %s", JSON.stringify(responseObject));
 
-        if (response.status === 200 && responseObject.result_message === "OK") {
-            setStatus("Report Submitted successfully.");
+        if (response.status === 200 && responseObject.username) {
+            let user = new User(responseObject);
+            user.set();
+            setStatus("Signin successful.");
         } else {
-            setStatus("Report Submition Failed.");
+            setStatus("Signin Failed.%s", responseObject.result_message ? " (" + responseObject.result_message + ")" : "");
         }
     };
 

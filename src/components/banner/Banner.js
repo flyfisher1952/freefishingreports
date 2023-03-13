@@ -1,6 +1,7 @@
-import "../App.css";
+import "../../App.css";
+import "./banner.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import image0 from "./../images/pexels-azwar-ipank-1133086.jpg";
+import image0 from "./../../images/pexels-azwar-ipank-1133086.jpg";
 
 const Banner = () => {
     return (

@@ -1,0 +1,13 @@
+.banner-image {
+    border-radius: 12px;
+    width: 96%;
+    height: auto;
+    bottom: 0;
+}
+
+.banner-container {
+    border-radius: 12px;
+    text-align: center;
+    margin: 4px;
+    padding: 4px;
+}

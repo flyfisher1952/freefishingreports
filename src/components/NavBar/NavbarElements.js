@@ -7,6 +7,7 @@ export const Nav = styled.nav`
     display: flex;
     justify-content: start;
     padding: 0.4rem;
+    background-color: #ffffff;
      z-index: 12;
     /* Third Nav */
     /* justify-content: flex-start; */
@@ -14,7 +15,7 @@ export const Nav = styled.nav`
 
 export const NavLink = styled(Link)`
     color: #808080;
-    background-color: #ffffff;
+    background-color: #f8f8f8;
     display: flex;
     align-items: center;
     text-decoration: none;

@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
-import Adds from "../components/Adds";
-import SolunarDay from "../components/SolunarDay";
+import Adds from "../components/adds/Adds";
+import SolunarDay from "../components/solunar/SolunarDay";
 import { Button, OverlayTrigger, Table, Popover, PopoverBody } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleQuestion } from "@fortawesome/free-regular-svg-icons";

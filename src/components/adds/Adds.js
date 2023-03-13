@@ -1,6 +1,6 @@
 import React from "react";
 import GoogleAd from "./GoogleAd";
-import "../App.css";
+import "../../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Adds = () => {

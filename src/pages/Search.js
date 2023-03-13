@@ -1,7 +1,7 @@
 import React from "react";
-import SearchBar from "../components/SearchBar";
-import ReportList from "../components/ReportList";
-import Adds from "../components/Adds";
+import SearchBar from "../components/search/SearchBar";
+import ReportList from "../components/reports/ReportList";
+import Adds from "../components/adds/Adds";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class Search extends React.Component {

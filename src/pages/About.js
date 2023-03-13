@@ -1,6 +1,6 @@
 import React from "react";
-import SolunarDay from "../components/SolunarDay";
-import Adds from "../components/Adds";
+import SolunarDay from "../components/solunar/SolunarDay";
+import Adds from "../components/adds/Adds";
 
 const About = () => {
     return (

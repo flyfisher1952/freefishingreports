@@ -1,7 +1,7 @@
 import React from "react";
-import SolunarDay from "../components/SolunarDay";
-import Blog from "../components/Blog";
-import Adds from "../components/Adds";
+import SolunarDay from "../components/solunar/SolunarDay";
+import Blog from "../components/blog/Blog";
+import Adds from "../components/adds/Adds";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Home = () => {

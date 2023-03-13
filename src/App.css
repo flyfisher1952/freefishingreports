@@ -12,21 +12,6 @@
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
-.banner-image {
-    border-radius: 12px;
-    width: 96%;
-    height: auto;
-    bottom: 0;
-}
-
-.banner-container {
-    border-radius: 12px;
-    text-align: center;
-    margin: 8px;
-    padding: 8px;
-    background-image: url(./images/pexels-karolina-grabowska-6478119.png);
-}
-
 .dropdown-button {
     width: 100%;
     height: 24em;
@@ -36,16 +21,6 @@
 .dropdown-menu {
     height: 300px;
     overflow-y: scroll;
-}
-
-.blog-table-row {
-    border-bottom: 1px solid gray;
-    margin-bottom: 0.35em;
-}
-
-.blog-author-col {
-    font-style: italic;
-    font-size: larger;
 }
 
 .ad-block-style {
@@ -133,4 +108,12 @@ a[rel="popover"] {
     font-style: italic;
     font-size: small;
     color: darkred;
+}
+
+.signin-col {
+    background-color: white;
+    height: 50px;
+    padding-left: 6px;
+    padding-top: 8px;
+    margin-left: -24px;
 }

@@ -3,8 +3,8 @@ import { AsyncTypeahead } from "react-bootstrap-typeahead";
 import { Editor } from "@tinymce/tinymce-react";
 import Button from "react-bootstrap/Button";
 import { Table } from "react-bootstrap";
-import Adds from "../components/Adds";
-import CurrentUser from "../components/db-services/CurrentUser";
+import Adds from "../components/adds/Adds";
+import { User } from "../components/user/User";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-typeahead/css/Typeahead.css";
@@ -91,7 +91,7 @@ const PostReport = () => {
 
     const postIt = async () => {
         if (editorRef.current) {
-            const user = new CurrentUser();
+            const user = new User();
             let report = {
                 water_id: selectedWater.water[0].id,
                 spot_id: selectedSpot.spot[0].id,
